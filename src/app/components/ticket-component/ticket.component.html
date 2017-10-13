@@ -1,0 +1,47 @@
+<div *ngIf="ticket != null" class="container-fluid content">
+  <h3 class="col-5">Tabel: {{ticket.tableNr}}</h3>
+  <div class="mb-2">
+    <app-item-search (onItemSelected)="addItemToTicket($event)" ></app-item-search>
+  </div>
+  <div class="table-responsive">
+  <table class="table">
+    <thead class="thead-default">
+    <tr>
+      <th>Nummer</th>
+      <th>Aantal</th>
+      <th></th>
+      <th>Beschrijving</th>
+      <th>Prijs</th>
+      <th>Total Prijs</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ticketItem of ticket.items">
+      <th scope="row">{{ticketItem.item.quicklink}}</th>
+      <td>{{ticketItem.count}}</td>
+      <td>
+        <button (click)="addItemToTicket(ticketItem.item.quicklink)" class="btn btn-sm btn-primary">+</button>
+        <button (click)="removeItemFromTicket(ticketItem.item.quicklink)" class="btn btn-sm btn-danger">-</button>
+      </td>
+      <td>{{ticketItem.item.name}}</td>
+      <td>{{ticketItem.item.price}}</td>
+      <td>{{ticketItem.totalPrice}}</td>
+    </tr>
+    </tbody>
+  </table>
+    <div class="d-flex flex-row-reverse">
+      <div class="w-25">
+        <ul class="list-group">
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
+          <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
+          <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>
+          <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="ticket == null">
+  test
+</div>

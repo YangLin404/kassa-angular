@@ -6,12 +6,25 @@ import {RestoItem} from './resto-item';
 
 
 @Injectable()
-export class RestoItemService {
+export class ItemSearchService {
   private baseUrl = 'http://localhost:7777/api/';
+  private items: RestoItem[] = [];
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+    this.getItemsFromServer()
+      .then(items => this.items = items)
+      .catch(this.handleError);
+  }
 
   getItems(): Promise<RestoItem[]> {
+    if (this.items.length !== 0) {
+      return Promise.resolve(this.items);
+    } else {
+      return this.getItemsFromServer();
+    }
+  }
+
+  getItemsFromServer(): Promise<RestoItem[]> {
     const url = this.baseUrl + 'getItems';
     return this.http.get(url)
       .toPromise()

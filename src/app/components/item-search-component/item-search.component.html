@@ -1,0 +1,13 @@
+<form class="form-inline">
+  <label for="typeahead-basic" class="mr-3">Zoek gerechten: </label>
+
+  <ng-template #rt let-r="result" let-t="term">
+    {{r.quicklink}} |
+    {{ r.name}}
+  </ng-template>
+
+  <input #searchInput id="typeahead-basic" type="text" class="form-control mr-2 col-8" [(ngModel)]="model" [ngbTypeahead]="search"
+         [resultTemplate]="rt" [inputFormatter]="formatter" [ngModelOptions]="{standalone: true}" (selectItem)="itemSelected($event)"/>
+  <button type="button" class="btn btn-primary">Voeg toe</button>
+
+</form>

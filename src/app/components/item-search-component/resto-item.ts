@@ -1,5 +1,4 @@
 export class RestoItem {
-  id: any;
   name: string;
   price: number;
   itemType: string;
