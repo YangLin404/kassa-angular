@@ -22,6 +22,8 @@ import {LoggerModule, NGXLogger, NgxLoggerLevel} from 'ngx-logger';
 import {TicketItemSortPipe} from './components/ticket-component/ticket-item-sort.pipe';
 import {TicketPaymentComponent} from './components/ticket-payment-component/ticket-payment.component';
 import {NgbModalStack} from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
+import {TakeawayComponent} from './components/takeaway-component/takeaway.component';
+import {TakeawayService} from './components/takeaway-component/takeaway.service';
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import {NgbModalStack} from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
     AppComponent,
     ItemSearchComponent,
     RestoComponent,
+    TakeawayComponent,
     TicketComponent,
     TicketPaymentComponent,
     TicketItemSortPipe
@@ -47,7 +50,7 @@ import {NgbModalStack} from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
     NgbModule,
     LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
   ],
-  providers: [ItemSearchService, RestoService, TicketService
+  providers: [ItemSearchService, RestoService, TicketService, TakeawayService
     , NgbAccordionConfig, NgbDropdownConfig, NgbTypeaheadConfig, NgbModal, NgbModalStack
     , NGXLogger],
   bootstrap: [AppComponent]

@@ -17,6 +17,7 @@ export class RestoComponent implements OnInit {
     this.restoService.getTables()
       .then((tables) => {
         this.tables = tables;
+        this.logger.debug(this.tables);
     } );
   }
 

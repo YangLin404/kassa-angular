@@ -23,7 +23,17 @@
         <button (click)="addItemToTicket(ticketItem.item.quicklink)" class="btn btn-sm btn-primary">+</button>
         <button (click)="removeItemFromTicket(ticketItem.item.quicklink)" class="btn btn-sm btn-danger">-</button>
       </td>
-      <td>{{ticketItem.item.name}}</td>
+      <td [ngClass]="{'Drink':'list-group-item-success',
+                      'Soup':'list-group-item-primary',
+                      'Entree':'list-group-item-primary',
+                      'MainDishe':'list-group-item-info',
+                      'Nasi':'list-group-item-info',
+                      'Bami':'list-group-item-info',
+                      'Menu':'list-group-item-info',
+                      'Supplement':'list-group-item-info',
+                      'Dessert':'list-group-item-warning'}[ticketItem.item.itemType]">
+        {{ticketItem.item.name}}
+      </td>
       <td>€ {{ticketItem.item.price}}</td>
       <td class="text-right">€ {{ticketItem.totalPrice}}</td>
     </tr>
