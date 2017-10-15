@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import {
-  NgbAccordionConfig, NgbDropdownConfig, NgbModule, NgbTypeahead,
+  NgbAccordionConfig, NgbDropdownConfig, NgbModal, NgbModule, NgbTypeahead,
   NgbTypeaheadConfig
 } from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -18,7 +18,10 @@ import {FormsModule, NgControl, ReactiveFormsModule} from '@angular/forms';
 
 import {TicketService} from './components/ticket-component/ticket.service';
 import {TicketComponent} from './components/ticket-component/ticket.component';
-import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
+import {LoggerModule, NGXLogger, NgxLoggerLevel} from 'ngx-logger';
+import {TicketItemSortPipe} from './components/ticket-component/ticket-item-sort.pipe';
+import {TicketPaymentComponent} from './components/ticket-payment-component/ticket-payment.component';
+import {NgbModalStack} from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
 
 
 @NgModule({
@@ -26,8 +29,14 @@ import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
     AppComponent,
     ItemSearchComponent,
     RestoComponent,
-    TicketComponent
+    TicketComponent,
+    TicketPaymentComponent,
+    TicketItemSortPipe
   ],
+  entryComponents: [
+    TicketPaymentComponent
+  ],
+
   imports: [
     BrowserModule,
     FormsModule,
@@ -39,7 +48,8 @@ import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
     LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
   ],
   providers: [ItemSearchService, RestoService, TicketService
-    , NgbAccordionConfig, NgbDropdownConfig, NgbTypeaheadConfig],
+    , NgbAccordionConfig, NgbDropdownConfig, NgbTypeaheadConfig, NgbModal, NgbModalStack
+    , NGXLogger],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

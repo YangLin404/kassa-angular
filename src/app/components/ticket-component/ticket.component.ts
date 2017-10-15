@@ -4,21 +4,29 @@ import {Component, OnInit} from '@angular/core';
 import {Ticket} from './ticket';
 import {TicketService} from './ticket.service';
 import {ActivatedRoute, Params} from '@angular/router';
+import { Location } from '@angular/common';
 import {TicketSummary} from './ticket-summary';
+import {NGXLogger} from 'ngx-logger';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TicketPaymentComponent} from '../ticket-payment-component/ticket-payment.component';
 
 @Component({
   selector: 'app-ticket',
-  templateUrl: './ticket.component.html'
+  templateUrl: './ticket.component.html',
+  styleUrls: ['./ticket.component.css'],
 })
 
 
 export class TicketComponent implements OnInit {
   ticket: Ticket;
-  ticketSummary: TicketSummary;
+  ticketSummary: TicketSummary = new TicketSummary();
 
   constructor(
     private ticketService: TicketService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private location: Location,
+    private modalService: NgbModal,
+    private logger: NGXLogger) {}
 
   ngOnInit(): void {
     this.route.params
@@ -45,6 +53,25 @@ export class TicketComponent implements OnInit {
       });
   }
 
+  payTicket(payMethod: string): void {
+    this.ticketService.payTicket(this.ticket.ticketNr, payMethod)
+      .then(paid => {
+        if (paid) {
+          this.location.back();
+        }
+      });
+  }
+
+  openPayment() {
+    const modalRef = this.modalService.open(TicketPaymentComponent);
+    modalRef.componentInstance.price = this.ticketSummary.totalPriceWithTax;
+    modalRef.result.then(result => {
+      if (result !== 'close') {
+        this.payTicket(result);
+      }
+    });
+  }
+
   private reloadTicket(): void {
     this.ticketService.getTicketByNr((this.ticket.ticketNr))
       .then(ticket => {
@@ -54,6 +81,7 @@ export class TicketComponent implements OnInit {
   }
 
   private calcTicketSummary() {
+    this.ticketSummary.reset();
     this.ticket.items.forEach(item => {
       this.ticketSummary.totalPriceWithTax += item.totalPrice;
       this.ticketSummary.totalPriceWithoutTax += item.totalPriceWithoutTax;
@@ -63,5 +91,7 @@ export class TicketComponent implements OnInit {
         this.ticketSummary.totalTaxFood += item.totalTax;
       }
     });
+    this.logger.debug(this.ticketSummary);
+    this.logger.debug(this.ticket);
   }
 }

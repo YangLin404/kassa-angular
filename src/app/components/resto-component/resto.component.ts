@@ -8,7 +8,6 @@ import {NGXLogger} from 'ngx-logger';
   selector: 'app-resto',
   templateUrl: './resto.component.html',
   styleUrls: ['./resto.component.css'],
-  providers: [NGXLogger]
 })
 
 export class RestoComponent implements OnInit {

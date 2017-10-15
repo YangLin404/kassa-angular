@@ -36,6 +36,14 @@ export class TicketService {
       .catch(this.handleError);
   }
 
+  payTicket(ticketNr: number, payMethod: string): Promise<boolean> {
+    const url = this.baseUrl + 'ticket/' + ticketNr + '/pay';
+    return this.http.post(url, payMethod, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as boolean)
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

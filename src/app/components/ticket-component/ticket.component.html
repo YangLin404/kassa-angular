@@ -4,7 +4,7 @@
     <app-item-search (onItemSelected)="addItemToTicket($event)" ></app-item-search>
   </div>
   <div class="table-responsive">
-  <table class="table">
+  <table class="table table-sm table-bordered table-hover">
     <thead class="thead-default">
     <tr>
       <th>Nummer</th>
@@ -12,33 +12,54 @@
       <th></th>
       <th>Beschrijving</th>
       <th>Prijs</th>
-      <th>Total Prijs</th>
+      <th class="text-right">Total Prijs</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let ticketItem of ticket.items">
-      <th scope="row">{{ticketItem.item.quicklink}}</th>
+    <tr *ngFor="let ticketItem of ticket.items | itemSort: 'quicklink'">
+      <th>{{ticketItem.item.quicklink}}</th>
       <td>{{ticketItem.count}}</td>
       <td>
         <button (click)="addItemToTicket(ticketItem.item.quicklink)" class="btn btn-sm btn-primary">+</button>
         <button (click)="removeItemFromTicket(ticketItem.item.quicklink)" class="btn btn-sm btn-danger">-</button>
       </td>
       <td>{{ticketItem.item.name}}</td>
-      <td>{{ticketItem.item.price}}</td>
-      <td>{{ticketItem.totalPrice}}</td>
+      <td>€ {{ticketItem.item.price}}</td>
+      <td class="text-right">€ {{ticketItem.totalPrice}}</td>
     </tr>
     </tbody>
   </table>
     <div class="d-flex flex-row-reverse">
       <div class="w-25">
-        <ul class="list-group">
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
-          <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
-          <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>
-          <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
-        </ul>
+        <div class="d-flex flex-row">
+          <ul class="list-group w-50">
+            <li class="list-group-item">Subtotal: </li>
+            <li class="list-group-item">Btw 12%: </li>
+            <li class="list-group-item">Btw 21%: </li>
+            <li class="list-group-item list-group-item-success">Total: € </li>
+          </ul>
+          <ul class="list-group w-50">
+            <li class="list-group-item text-right">€ {{ticketSummary.totalPriceWithoutTax.toFixed(2)}}</li>
+            <li class="list-group-item text-right">€ {{ticketSummary.totalTaxFood.toFixed(2)}}</li>
+            <li class="list-group-item text-right">€ {{ticketSummary.totalTaxDrink.toFixed(2)}}</li>
+            <li class="list-group-item list-group-item-success text-right">€ {{ticketSummary.totalPriceWithTax.toFixed(2)}}</li>
+          </ul>
+        </div>
       </div>
+        <div class="w-25">
+          <div [ngSwitch]="ticket.payMethod" class="half-height">
+            <div *ngSwitchCase="'None'" class="full-height">
+              <button (click)="openPayment()" class="mt-auto btn btn-lg btn-primary btn-block full-height">Betalen</button>
+            </div>
+            <div *ngSwitchCase="'Card'" class="full-height">
+
+            </div>
+            <div *ngSwitchCase="'Cash'" class="full-height">
+
+            </div>
+            <div></div>
+          </div>
+        </div>
     </div>
   </div>
 </div>

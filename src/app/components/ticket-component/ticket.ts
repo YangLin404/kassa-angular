@@ -12,4 +12,8 @@ export class Ticket {
   tableNr: string;
   items: TicketItem[] = [];
 
+  public ispaid(): boolean {
+    return this.payMethod !== 'None';
+  }
+
 }
