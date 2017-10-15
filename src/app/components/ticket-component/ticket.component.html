@@ -16,7 +16,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let ticketItem of ticket.items | itemSort: 'quicklink'">
+    <tr *ngFor="let ticketItem of ticket.items | itemSort">
       <th>{{ticketItem.item.quicklink}}</th>
       <td>{{ticketItem.count}}</td>
       <td>
