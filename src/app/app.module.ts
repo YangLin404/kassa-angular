@@ -24,6 +24,7 @@ import {TicketPaymentComponent} from './components/ticket-payment-component/tick
 import {NgbModalStack} from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
 import {TakeawayComponent} from './components/takeaway-component/takeaway.component';
 import {TakeawayService} from './components/takeaway-component/takeaway.service';
+import {TakeawayTicketSortPipe} from './components/takeaway-component/takeaway-ticket-sort.pipe';
 
 
 @NgModule({
@@ -34,10 +35,11 @@ import {TakeawayService} from './components/takeaway-component/takeaway.service'
     TakeawayComponent,
     TicketComponent,
     TicketPaymentComponent,
-    TicketItemSortPipe
+    TicketItemSortPipe,
+    TakeawayTicketSortPipe
   ],
   entryComponents: [
-    TicketPaymentComponent
+    TicketPaymentComponent,
   ],
 
   imports: [

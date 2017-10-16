@@ -3,12 +3,16 @@
     <button (click)="createTicket()" class="btn btn-lg btn-primary btn-block fixed-top nieuweTakeAwayTicketBtn">Nieuw ticket</button>
   </div>
   <div class="row">
-    <div class="col-xl-3 col-md-4 col-sm-6" *ngFor="let ticket of tickets">
+    <div class="col-xl-3 col-md-4 col-sm-6" *ngFor="let ticket of tickets | takeawayTicketSortByTime">
       <div class="card table-card">
         <div class="card-header">
           <div class="card-title">Ticket: {{ticket.ticketIdentifier}}</div>
         </div>
         <div class="card-block">
+          <div class="input-group">
+            <span class="input-group-addon">Name</span>
+            <input type="text" class="form-control"/>
+          </div>
         </div>
         <div class="card-footer">
           <div *ngIf="ticket.payMethod !== 'None'">
