@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import {
-  NgbAccordionConfig, NgbDropdownConfig, NgbModal, NgbModule, NgbTypeahead,
+  NgbAccordionConfig, NgbDropdownConfig, NgbModal, NgbModule, NgbTimepickerConfig, NgbTypeahead,
   NgbTypeaheadConfig
 } from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -22,9 +22,10 @@ import {LoggerModule, NGXLogger, NgxLoggerLevel} from 'ngx-logger';
 import {TicketItemSortPipe} from './components/ticket-component/ticket-item-sort.pipe';
 import {TicketPaymentComponent} from './components/ticket-payment-component/ticket-payment.component';
 import {NgbModalStack} from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
-import {TakeawayComponent} from './components/takeaway-component/takeaway.component';
-import {TakeawayService} from './components/takeaway-component/takeaway.service';
-import {TakeawayTicketSortPipe} from './components/takeaway-component/takeaway-ticket-sort.pipe';
+import {TakeawayComponent} from './takeaway-module/takeaway-component/takeaway.component';
+import {TakeawayService} from './takeaway-module/takeaway-component/takeaway.service';
+import {TakeawayTicketSortPipe} from './takeaway-module/takeaway-component/takeaway-ticket-sort.pipe';
+import {TakeawayModule} from './takeaway-module/takeaway.module';
 
 
 @NgModule({
@@ -32,11 +33,9 @@ import {TakeawayTicketSortPipe} from './components/takeaway-component/takeaway-t
     AppComponent,
     ItemSearchComponent,
     RestoComponent,
-    TakeawayComponent,
     TicketComponent,
     TicketPaymentComponent,
     TicketItemSortPipe,
-    TakeawayTicketSortPipe
   ],
   entryComponents: [
     TicketPaymentComponent,
@@ -50,10 +49,11 @@ import {TakeawayTicketSortPipe} from './components/takeaway-component/takeaway-t
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgbModule,
-    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR})
+    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
+    TakeawayModule
   ],
-  providers: [ItemSearchService, RestoService, TicketService, TakeawayService
-    , NgbAccordionConfig, NgbDropdownConfig, NgbTypeaheadConfig, NgbModal, NgbModalStack
+  providers: [ItemSearchService, RestoService, TicketService
+    , NgbAccordionConfig, NgbDropdownConfig, NgbTypeaheadConfig, NgbTimepickerConfig, NgbModal, NgbModalStack
     , NGXLogger],
   bootstrap: [AppComponent]
 })

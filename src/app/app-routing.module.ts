@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {RestoComponent} from './components/resto-component/resto.component';
 import {TicketComponent} from './components/ticket-component/ticket.component';
-import {TakeawayComponent} from './components/takeaway-component/takeaway.component';
+import {TakeawayComponent} from './takeaway-module/takeaway-component/takeaway.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/tables', pathMatch: 'full' },

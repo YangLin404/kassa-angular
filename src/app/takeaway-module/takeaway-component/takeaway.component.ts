@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Ticket} from '../ticket-component/ticket';
+import {Ticket} from '../../components/ticket-component/ticket';
 import {TakeawayService} from './takeaway.service';
 import {NGXLogger} from 'ngx-logger';
 import {Router} from '@angular/router';

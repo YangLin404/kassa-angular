@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Ticket} from '../ticket-component/ticket';
+import {Ticket} from '../../components/ticket-component/ticket';
 
 @Pipe({
   name: 'takeawayTicketSortByTime'

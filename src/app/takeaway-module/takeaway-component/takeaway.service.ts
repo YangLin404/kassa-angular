@@ -1,6 +1,6 @@
 
 import {Injectable} from '@angular/core';
-import {Ticket} from '../ticket-component/ticket';
+import {Ticket} from '../../components/ticket-component/ticket';
 import {Http, Headers} from '@angular/http';
 
 @Injectable()

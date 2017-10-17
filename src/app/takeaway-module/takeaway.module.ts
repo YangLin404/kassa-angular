@@ -1,0 +1,27 @@
+import {NgModule} from '@angular/core';
+import {TakeawayService} from './takeaway-component/takeaway.service';
+import {TakeawayComponent} from './takeaway-component/takeaway.component';
+import {TakeawayTicketSortPipe} from './takeaway-component/takeaway-ticket-sort.pipe';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
+import {FormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from '../app-routing.module';
+
+@NgModule({
+  declarations: [
+    TakeawayComponent,
+    TakeawayTicketSortPipe],
+
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    NgbModule,
+    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
+  ],
+
+  providers: [TakeawayService]
+})
+
+export class TakeawayModule { }
