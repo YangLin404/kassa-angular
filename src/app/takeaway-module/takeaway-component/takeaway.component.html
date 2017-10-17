@@ -11,8 +11,13 @@
         <div class="card-block">
           <div class="input-group">
             <span class="input-group-addon">Name</span>
-            <input type="text" class="form-control"/>
+            <input [ngModel]="names[ticket.ticketNr]" type="text" class="form-control"/>
           </div>
+            <ngb-timepicker [(ngModel)]="times[ticket.ticketNr]"
+            [hourStep]="1" [minuteStep]="15"></ngb-timepicker>
+          <button class="m-t-1 btn btn-sm btn-outline-primary" (click)="updateTicketInfo(ticket.ticketNr)">
+            Aanpassen
+          </button>
         </div>
         <div class="card-footer">
           <div *ngIf="ticket.payMethod !== 'None'">
