@@ -2,13 +2,14 @@
 import {Injectable} from '@angular/core';
 import {Ticket} from '../../components/ticket-component/ticket';
 import {Http, Headers} from '@angular/http';
+import {NGXLogger} from 'ngx-logger';
 
 @Injectable()
 export class TakeawayService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private baseUrl = 'http://localhost:7777/api/takeaway/';
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private logger: NGXLogger) {}
 
   getTakeawayTickets(): Promise<Ticket[]> {
     const url = this.baseUrl + 'getTodaysTakeawayTicket';
@@ -26,10 +27,10 @@ export class TakeawayService {
       .catch(this.handleError);
   }
 
-  updateTicketInfo(ticketNr: number, time: string, name: string): Promise<boolean> {
+  updateTicketName(ticketNr: number, name: string): Promise<boolean> {
     const url = this.baseUrl + 'updateTicket/' + ticketNr;
-    const body = JSON.stringify({time: time, name: name});
-    return this.http.post(url, body, {headers: this.headers})
+    this.logger.log('updating ticket ' + ticketNr + ' name is ' + name);
+    return this.http.post(url, name, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as boolean)
       .catch(this.handleError);

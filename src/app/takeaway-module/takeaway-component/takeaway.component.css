@@ -5,3 +5,25 @@
 .nieuweTakeAwayTicketBtn {
   margin-top: 65px;
 }
+
+body, html, .container-fluid {
+  height: 100% !important;
+}
+
+.wrapper {
+  min-height: 100vh;
+  max-height: 100%;
+}
+
+aside {
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+main {
+  max-height: 75%;
+  overflow-y: auto;
+}
+
+
+

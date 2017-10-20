@@ -7,11 +7,14 @@ import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../app-routing.module';
+import {TimeBoxComponent} from './time-box-component/time-box.component';
+import {TimeBoxService} from './time-box-component/time-box.service';
 
 @NgModule({
   declarations: [
     TakeawayComponent,
-    TakeawayTicketSortPipe],
+    TakeawayTicketSortPipe,
+    TimeBoxComponent],
 
   imports: [
     BrowserModule,
@@ -21,7 +24,7 @@ import {AppRoutingModule} from '../app-routing.module';
     LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
   ],
 
-  providers: [TakeawayService]
+  providers: [TakeawayService, TimeBoxService]
 })
 
 export class TakeawayModule { }
