@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Ticket} from './ticket';
+import {NGXLogger} from 'ngx-logger';
 
 
 @Injectable()
@@ -10,7 +11,8 @@ export class TicketService {
   private baseUrl = 'http://localhost:7777/api/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) {}
+  constructor(private http: Http,
+              private logger: NGXLogger) {}
 
   getTicketByNr(ticketNr: number): Promise<Ticket> {
     const url = this.baseUrl + 'getTodayTicketByNr?ticketNr=' + ticketNr;
@@ -31,6 +33,15 @@ export class TicketService {
   removeItemFromTicket(ticketNr: number, quicklink: string): Promise<boolean> {
     const url = this.baseUrl + 'ticket/' + ticketNr + '/removeItemFromTicket';
     return this.http.post(url, quicklink, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as boolean)
+      .catch(this.handleError);
+  }
+
+  updateTicketTime(ticketNr: number, time: string): Promise<boolean> {
+    const url = this.baseUrl + 'ticket/' + ticketNr + '/time';
+    this.logger.log('updating ticket ' + ticketNr + ' time is ' + time);
+    return this.http.post(url, time, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as boolean)
       .catch(this.handleError);

@@ -1,5 +1,10 @@
 <div *ngIf="ticket != null" class="container-fluid content">
-  <h3 class="col-5">Tabel: {{ticket.tableNr}}</h3>
+  <form class="form-inline">
+    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+      <div class="input-group-addon">Naam</div>
+      <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+    </div>
+  </form>
   <div class="mb-2">
     <app-item-search (onItemSelected)="addItemToTicket($event)" ></app-item-search>
   </div>

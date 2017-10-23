@@ -5,6 +5,7 @@ import {NGXLogger} from 'ngx-logger';
 import {Router} from '@angular/router';
 import {NgbModal, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import {TimeBoxComponent} from '../time-box-component/time-box.component';
+import {TicketService} from '../../components/ticket-component/ticket.service';
 
 @Component({
   selector: 'app-takeaway',
@@ -20,6 +21,7 @@ export class TakeawayComponent implements OnInit {
   names: string[] = [];
 
   constructor(private takeawayService: TakeawayService,
+              private ticketService: TicketService,
               private router: Router,
               private logger: NGXLogger,
               private modalService: NgbModal, ) {}
@@ -67,10 +69,10 @@ export class TakeawayComponent implements OnInit {
   updateTicketTime(ticketNr: number, time: string): void {
     const ticketToUpdate = this.findTicketByNr(ticketNr);
     if (ticketToUpdate.time !== time) {
-      this.takeawayService.updateTicketTime(ticketNr, time)
+      this.ticketService.updateTicketTime(ticketNr, time)
         .then(success => {
           if (success) {
-            this.logger.debug('update time to server successfull, now updating local values')
+            this.logger.debug('update time to server successfull, now updating local values');
             ticketToUpdate.time = time;
             this.times[ticketNr] = time;
             this.timeBox.takenTimes = this.times;
