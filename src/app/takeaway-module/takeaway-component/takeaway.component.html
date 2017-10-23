@@ -1,7 +1,7 @@
 <div class="container-fluid takeawayContent">
   <div class="row wrapper">
     <aside class="p-0 bg-inverse col-sm-2 col-md-1">
-      <app-time-box></app-time-box>
+      <app-time-box #timeBox *ngIf="times.length !=0" [takenTimes]="times"></app-time-box>
     </aside>
     <main class="col bg-faded py-3">
       <div>
@@ -11,22 +11,28 @@
         <div class="col-xl-3 col-md-4 col-sm-6" *ngFor="let ticket of tickets | takeawayTicketSortByTime">
           <div class="card table-card">
             <div class="card-header">
-              <div class="card-title">Ticket: {{ticket.ticketIdentifier}}</div>
+              <div class="card-title">
+              </div>
             </div>
             <div class="card-block">
               <div class="input-group mb-1">
                 <span class="input-group-addon col-3">Naam</span>
-                <input #nameInput (blur)="updateTicketName(ticket.ticketNr, nameInput.value)" (keyup.enter)="updateTicketName(ticket.ticketNr, nameInput.value)" [(ngModel)]="names[ticket.ticketNr]" type="text" class="form-control"/>
+                <input #nameInput (blur)="updateTicketName(ticket.ticketNr, nameInput.value)"
+                       (keyup.enter)="updateTicketName(ticket.ticketNr, nameInput.value)"
+                       [(ngModel)]="names[ticket.ticketNr]" type="text" class="form-control"/>
               </div>
-              <div class="input-group">
+              <div class="input-group mb-1">
                 <span class="input-group-addon col-3">Tijd</span>
-                <button class="btn btn-secondary btn-block">{{times[ticket.ticketNr]}}</button>
+                <button class="btn btn-secondary btn-block" (click)="openTimeLine(ticket.ticketNr)">{{times[ticket.ticketNr]}}</button>
               </div>
+              <button class="btn btn-block" [ngClass]="{'btn-outline-success': ticket.isPaid, 'btn-outline-warning': !ticket.isPaid}" disabled>
+                {{ticket.isPaid?'Betaald':'Niet betaald'}}
+              </button>
+              <button (click)="takeFood(!ticket.isTaken, ticket.ticketNr)" class="btn btn-block" [ngClass]="{'btn-outline-success': ticket.isTaken, 'btn-outline-warning': !ticket.isTaken}">
+                {{ticket.isTaken?'meegenomen':'in verwerking'}}
+              </button>
             </div>
             <div class="card-footer">
-              <div *ngIf="ticket.payMethod !== 'None'">
-                Betaald
-              </div>
               <a [routerLink]="['/ticket', ticket.ticketNr]" class="btn btn-success btn-block linkBtn" style="color: white">open ticket</a>
             </div>
           </div>

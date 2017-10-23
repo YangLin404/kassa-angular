@@ -1,3 +1,6 @@
 <div class="list-group">
-  <a *ngFor="let timeFrame of times" class="list-group-item list-group-item-action p-0" ngClass="">{{timeFrame.time}}</a>
+  <a *ngFor="let timeFrame of times" class="list-group-item list-group-item-action p-0"
+     [class.list-group-item-danger]="timeFrame.taken"
+     [class.list-group-item-warning]="timeFrame.warning && !timeFrame.taken"
+      (click)="choseTime(timeFrame.time)">{{timeFrame.time}}</a>
 </div>

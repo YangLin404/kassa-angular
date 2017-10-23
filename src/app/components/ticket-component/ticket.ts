@@ -10,10 +10,8 @@ export class Ticket {
   payMethod: string;
   ticketType: string;
   tableNr: string;
+  isTaken: boolean;
+  isPaid: boolean;
   items: TicketItem[] = [];
-
-  public ispaid(): boolean {
-    return this.payMethod !== 'None';
-  }
 
 }

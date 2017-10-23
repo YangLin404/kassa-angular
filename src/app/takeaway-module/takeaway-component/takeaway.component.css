@@ -25,5 +25,8 @@ main {
   overflow-y: auto;
 }
 
+.centerItems {
+  align-items: center;
+}
 
 
