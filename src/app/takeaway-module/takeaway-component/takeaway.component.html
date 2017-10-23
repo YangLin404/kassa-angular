@@ -25,12 +25,15 @@
                 <span class="input-group-addon col-3">Tijd</span>
                 <button class="btn btn-secondary btn-block" (click)="openTimeLine(ticket.ticketNr)">{{times[ticket.ticketNr]}}</button>
               </div>
-              <button class="btn btn-block" [ngClass]="{'btn-outline-success': ticket.isPaid, 'btn-outline-warning': !ticket.isPaid}" disabled>
-                {{ticket.isPaid?'Betaald':'Niet betaald'}}
-              </button>
-              <button (click)="takeFood(!ticket.isTaken, ticket.ticketNr)" class="btn btn-block" [ngClass]="{'btn-outline-success': ticket.isTaken, 'btn-outline-warning': !ticket.isTaken}">
-                {{ticket.isTaken?'meegenomen':'in verwerking'}}
-              </button>
+              <div class="btn-group col-12" role="group">
+                <button class="btn col-6 mr-1" [ngClass]="{'btn-outline-success': ticket.isPaid, 'btn-outline-warning': !ticket.isPaid}" disabled>
+                  {{ticket.isPaid?'Betaald':'Niet betaald'}}
+                </button>
+                <button (click)="takeFood(!ticket.isTaken, ticket.ticketNr)" class="btn col-6" [ngClass]="{'btn-outline-success': ticket.isTaken, 'btn-outline-warning': !ticket.isTaken}">
+                  {{ticket.isTaken?'meegenomen':'in verwerking'}}
+                </button>
+              </div>
+
             </div>
             <div class="card-footer">
               <a [routerLink]="['/ticket', ticket.ticketNr]" class="btn btn-success btn-block linkBtn" style="color: white">open ticket</a>
