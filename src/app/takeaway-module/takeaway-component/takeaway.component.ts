@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {NgbModal, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import {TimeBoxComponent} from '../time-box-component/time-box.component';
 import {TicketService} from '../../components/ticket-component/ticket.service';
+import {ConfirmComponent} from '../../components/confirm-component/confirm.component';
 
 @Component({
   selector: 'app-takeaway',
@@ -54,10 +55,30 @@ export class TakeawayComponent implements OnInit {
       });
   }
 
+  deleteTicket(ticketNr: number): void {
+    this.ticketService.deleteTicket(ticketNr)
+      .then(success => {
+        if (success) {
+          this.removeTicketFromList(ticketNr);
+        }
+      });
+  }
+
+  openConfirmModal(ticketNr: number): void {
+    const modalRef = this.modalService.open(ConfirmComponent);
+    modalRef.componentInstance.msg = 'Ben je zeker dat je de ticket wilt verwijderen?';
+    modalRef.result
+      .then(result => {
+        if (result === true) {
+          this.deleteTicket(ticketNr);
+        }
+      });
+  }
+
   updateTicketName(ticketNr: number, name: string): void {
     const ticketToUpdate = this.findTicketByNr(ticketNr);
     if (ticketToUpdate.name !== name) {
-      this.takeawayService.updateTicketName(ticketNr, this.names[ticketNr])
+      this.ticketService.updateTicketName(ticketNr, this.names[ticketNr])
         .then(success => {
           if (success) {
             ticketToUpdate.name = name;
@@ -97,6 +118,18 @@ export class TakeawayComponent implements OnInit {
 
   private findTicketByNr(ticketNr: number): Ticket {
     return this.tickets.find(t => t.ticketNr === ticketNr);
+  }
+
+  private removeTicketFromList(ticketNr: number): void {
+    const ticketToRemove = this.findTicketByNr(ticketNr);
+    const indexTicket = this.tickets.indexOf(ticketToRemove);
+    if (indexTicket !== -1) {
+      this.tickets.splice(indexTicket, 1);
+      this.names.splice(ticketNr, 1);
+      this.times.splice(ticketNr, 1);
+      this.timeBox.takenTimes = this.times;
+      this.timeBox.updateView();
+    }
   }
 
   private setTimesAndName(): void {

@@ -26,6 +26,7 @@ import {TakeawayComponent} from './takeaway-module/takeaway-component/takeaway.c
 import {TakeawayService} from './takeaway-module/takeaway-component/takeaway.service';
 import {TakeawayTicketSortPipe} from './takeaway-module/takeaway-component/takeaway-ticket-sort.pipe';
 import {TakeawayModule} from './takeaway-module/takeaway.module';
+import {ConfirmComponent} from './components/confirm-component/confirm.component';
 
 
 @NgModule({
@@ -36,9 +37,11 @@ import {TakeawayModule} from './takeaway-module/takeaway.module';
     TicketComponent,
     TicketPaymentComponent,
     TicketItemSortPipe,
+    ConfirmComponent
   ],
   entryComponents: [
     TicketPaymentComponent,
+    ConfirmComponent
   ],
 
   imports: [
@@ -49,7 +52,7 @@ import {TakeawayModule} from './takeaway-module/takeaway.module';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgbModule,
-    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
+    LoggerModule.forRoot({level: NgxLoggerLevel.INFO, serverLogLevel: NgxLoggerLevel.ERROR}),
     TakeawayModule
   ],
   providers: [ItemSearchService, RestoService, TicketService

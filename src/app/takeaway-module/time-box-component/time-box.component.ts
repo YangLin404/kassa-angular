@@ -55,7 +55,7 @@ export class TimeBoxComponent implements OnInit {
       timeFrameToChange.taken = taken;
       let index = this.times.indexOf(timeFrameToChange);
       const indexToReach = index >= 4 ? index - 4 : 0;
-      for (index = index - 1; index > indexToReach; index--) {
+      for (index = index + 3; index > indexToReach; index--) {
         if (!this.times[index].taken) {
           this.times[index].warning = taken;
         }

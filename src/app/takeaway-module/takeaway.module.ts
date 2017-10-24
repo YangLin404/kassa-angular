@@ -15,7 +15,8 @@ import {NgbModalStack} from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
   declarations: [
     TakeawayComponent,
     TakeawayTicketSortPipe,
-    TimeBoxComponent],
+    TimeBoxComponent,
+  ],
 
   entryComponents: [
     TimeBoxComponent,
@@ -26,7 +27,7 @@ import {NgbModalStack} from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
     FormsModule,
     AppRoutingModule,
     NgbModule,
-    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
+    LoggerModule.forRoot({level: NgxLoggerLevel.INFO, serverLogLevel: NgxLoggerLevel.ERROR}),
   ],
 
   providers: [TakeawayService, TimeBoxService,

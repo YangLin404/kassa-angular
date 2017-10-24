@@ -47,9 +47,26 @@ export class TicketService {
       .catch(this.handleError);
   }
 
+  updateTicketName(ticketNr: number, name: string): Promise<boolean> {
+    const url = this.baseUrl + 'ticket/' + ticketNr + '/name';
+    this.logger.log('updating ticket ' + ticketNr + ' name is ' + name);
+    return this.http.post(url, name, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as boolean)
+      .catch(this.handleError);
+  }
+
   payTicket(ticketNr: number, payMethod: string): Promise<boolean> {
     const url = this.baseUrl + 'ticket/' + ticketNr + '/pay';
     return this.http.post(url, payMethod, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as boolean)
+      .catch(this.handleError);
+  }
+
+  deleteTicket(ticketNr: number): Promise<boolean> {
+    const url = this.baseUrl + 'ticket/' + ticketNr;
+    return this.http.delete(url)
       .toPromise()
       .then(response => response.json() as boolean)
       .catch(this.handleError);

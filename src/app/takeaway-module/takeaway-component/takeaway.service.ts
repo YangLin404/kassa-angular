@@ -27,14 +27,6 @@ export class TakeawayService {
       .catch(this.handleError);
   }
 
-  updateTicketName(ticketNr: number, name: string): Promise<boolean> {
-    const url = this.baseUrl + 'updateTicket/' + ticketNr;
-    this.logger.log('updating ticket ' + ticketNr + ' name is ' + name);
-    return this.http.post(url, name, {headers: this.headers})
-      .toPromise()
-      .then(response => response.json() as boolean)
-      .catch(this.handleError);
-  }
 
   updateTicketTakenStat(ticketNr: number, taken: boolean) {
     const url = this.baseUrl + 'ticket/' + ticketNr + '/taken';
