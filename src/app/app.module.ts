@@ -27,6 +27,9 @@ import {TakeawayService} from './takeaway-module/takeaway-component/takeaway.ser
 import {TakeawayTicketSortPipe} from './takeaway-module/takeaway-component/takeaway-ticket-sort.pipe';
 import {TakeawayModule} from './takeaway-module/takeaway.module';
 import {ConfirmComponent} from './components/confirm-component/confirm.component';
+import {OverviewModule} from './overview-module/overview.module';
+import {TicketItemRemarkComponent} from './components/ticket-item-remark-component/ticket-item-remark.component';
+import {TicketItemRemarkService} from './components/ticket-item-remark-component/ticket-item-remark.service';
 
 
 @NgModule({
@@ -37,11 +40,13 @@ import {ConfirmComponent} from './components/confirm-component/confirm.component
     TicketComponent,
     TicketPaymentComponent,
     TicketItemSortPipe,
-    ConfirmComponent
+    ConfirmComponent,
+    TicketItemRemarkComponent
   ],
   entryComponents: [
     TicketPaymentComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    TicketItemRemarkComponent
   ],
 
   imports: [
@@ -53,9 +58,10 @@ import {ConfirmComponent} from './components/confirm-component/confirm.component
     ReactiveFormsModule,
     NgbModule,
     LoggerModule.forRoot({level: NgxLoggerLevel.INFO, serverLogLevel: NgxLoggerLevel.ERROR}),
-    TakeawayModule
+    TakeawayModule,
+    OverviewModule
   ],
-  providers: [ItemSearchService, RestoService, TicketService
+  providers: [ItemSearchService, RestoService, TicketService, TicketItemRemarkService
     , NgbAccordionConfig, NgbDropdownConfig, NgbTypeaheadConfig, NgbTimepickerConfig, NgbModal, NgbModalStack
     , NGXLogger],
   bootstrap: [AppComponent]

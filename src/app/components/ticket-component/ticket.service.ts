@@ -56,6 +56,22 @@ export class TicketService {
       .catch(this.handleError);
   }
 
+  updateTicketItemRemark(ticketNr: number, quicklink: string, remark: string): Promise<boolean> {
+    const url = this.baseUrl + 'ticket/' + ticketNr + '/ticketItem/' + quicklink + '/remark';
+    return this.http.post(url, remark, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as boolean)
+      .catch(this.handleError);
+  }
+
+  addExtraToTicketItem(ticketNr: number, quicklink: string, extra: string): Promise<boolean> {
+    const url = this.baseUrl + 'ticket/' + ticketNr + '/ticketItem/' + quicklink + '/extra';
+    return this.http.post(url, extra, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as boolean)
+      .catch(this.handleError);
+  }
+
   payTicket(ticketNr: number, payMethod: string): Promise<boolean> {
     const url = this.baseUrl + 'ticket/' + ticketNr + '/pay';
     return this.http.post(url, payMethod, {headers: this.headers})

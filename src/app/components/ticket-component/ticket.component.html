@@ -25,6 +25,7 @@
       <th>Aantal</th>
       <th></th>
       <th>Beschrijving</th>
+      <th>Opmerking</th>
       <th>Prijs</th>
       <th class="text-right">Total Prijs</th>
     </tr>
@@ -37,7 +38,7 @@
         <button (click)="addItemToTicket(ticketItem.item.quicklink)" class="btn btn-sm btn-primary">+</button>
         <button (click)="removeItemFromTicket(ticketItem.item.quicklink)" class="btn btn-sm btn-danger">-</button>
       </td>
-      <td [ngClass]="{'Drink':'list-group-item-success',
+      <td (click)="openRemark(ticketItem)" [ngClass]="{'Drink':'list-group-item-success',
                       'Soup':'list-group-item-primary',
                       'Entree':'list-group-item-primary',
                       'MainDishe':'list-group-item-info',
@@ -47,6 +48,10 @@
                       'Supplement':'list-group-item-info',
                       'Dessert':'list-group-item-warning'}[ticketItem.item.itemType]">
         {{ticketItem.item.name}}
+      </td>
+      <td>
+        <span *ngFor="let extra of ticketItem.extras" class="badge badge-success">{{extra.name}}</span>
+        {{ticketItem.remark}}
       </td>
       <td>€ {{ticketItem.item.price}}</td>
       <td class="text-right">€ {{ticketItem.totalPrice}}</td>

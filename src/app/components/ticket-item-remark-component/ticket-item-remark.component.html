@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title">Hi there!</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div *ngIf="extras">
+    <button *ngFor="let extra of extras"
+            class="btn btn-outline-primary mr-1"
+            [class.active]="containsExtra(extra.name)"
+            (click)="choseExtra(extra.name)">{{extra.name}}</button>
+  </div>
+  <hr>
+  <div class="input-group">
+    <span class="input-group-addon">Opmerking</span>
+    <input #remarkInput type="text" class="form-control" [ngModel]="item.remark">
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="activeModal.close(remarkInput.value)">Bevestigen</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('close')">Close</button>
+</div>

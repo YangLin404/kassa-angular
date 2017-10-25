@@ -10,6 +10,9 @@ import {NGXLogger} from 'ngx-logger';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TicketPaymentComponent} from '../ticket-payment-component/ticket-payment.component';
 import {TimeBoxComponent} from '../../takeaway-module/time-box-component/time-box.component';
+import {TicketItemRemarkComponent} from '../ticket-item-remark-component/ticket-item-remark.component';
+import {TicketItem} from '../item-search-component/ticket-item';
+import {TicketItemRemarkService} from '../ticket-item-remark-component/ticket-item-remark.service';
 
 @Component({
   selector: 'app-ticket',
@@ -24,6 +27,7 @@ export class TicketComponent implements OnInit {
 
   constructor(
     private ticketService: TicketService,
+    private ticketItemRemarkService: TicketItemRemarkService,
     private route: ActivatedRoute,
     private location: Location,
     private modalService: NgbModal,
@@ -40,7 +44,7 @@ export class TicketComponent implements OnInit {
     this.ticketService.addItemToTicket(this.ticket.ticketNr, quicklink)
       .then(added => {
         if (added) {
-          this.reloadTicket();
+          this.reloadTicketAfterAddItem(quicklink);
         }
       });
   }
@@ -85,6 +89,36 @@ export class TicketComponent implements OnInit {
       });
   }
 
+  openRemark(ticketItem: TicketItem) {
+    const modalRef = this.modalService.open(TicketItemRemarkComponent);
+    modalRef.componentInstance.item = ticketItem;
+    modalRef.result
+      .then(result => {
+        if (result !== 'close') {
+          this.logger.info('result of remark modal is : ' + result);
+          if (this.ticketItemRemarkService.isExtra(result)) {
+            this.addExtraToItem(ticketItem, result);
+          } else {
+            this.logger.info('This is a remark: ' + result);
+            this.updateTicketRemark(ticketItem, result);
+          }
+        }
+      });
+  }
+
+  private addExtraToItem(ticketItem: TicketItem, extra: string) {
+    this.ticketService.addExtraToTicketItem(this.ticket.ticketNr, ticketItem.item.quicklink, extra)
+      .then(success => {
+        if (success) {
+          this.ticketService.getTicketByNr(this.ticket.ticketNr)
+            .then(ticket => {
+              this.ticket = ticket;
+              this.calcTicketSummary();
+            });
+        }
+      });
+  }
+
   updateTicketTime(time: string): void {
     if (this.ticket.time !== time) {
       this.ticketService.updateTicketTime(this.ticket.ticketNr, time)
@@ -108,6 +142,25 @@ export class TicketComponent implements OnInit {
     }
   }
 
+  updateTicketRemark(ticketItem: TicketItem, remark: string): void {
+    if (ticketItem.remark !== remark) {
+      this.ticketService.updateTicketItemRemark(this.ticket.ticketNr, ticketItem.item.quicklink, remark)
+        .then(success => {
+          if (success) {
+            ticketItem.remark = remark;
+          }
+        });
+    }
+  }
+
+  private reloadTicketAfterAddItem(quicklink: string): void {
+    this.ticketService.getTicketByNr((this.ticket.ticketNr))
+      .then(ticket => {
+        this.ticket = ticket;
+        this.calcTicketSummary();
+        this.openRemark(this.ticket.items.find(i => i.item.quicklink === quicklink));
+      });
+  }
   private reloadTicket(): void {
     this.ticketService.getTicketByNr((this.ticket.ticketNr))
       .then(ticket => {
