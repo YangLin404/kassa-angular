@@ -1,10 +1,19 @@
 <div *ngIf="ticket != null" class="container-fluid content">
-  <form class="form-inline">
-    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-      <div class="input-group-addon">Naam</div>
-      <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
-    </div>
-  </form>
+  <div class="mt-2 mb-3">
+    <form class="form-inline">
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <div class="input-group-addon">Naam</div>
+        <input #nameInput type="text" class="form-control" id="inlineFormInputGroup" placeholder="Klant naam"
+               name="klantNameInput" [ngModel]="ticket.name"
+               (blur)="updateTicketName(nameInput.value)"
+               (keyup.enter)="updateTicketName(nameInput.value)">
+      </div>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <span class="input-group-addon">Tijd</span>
+        <button class="btn btn-secondary btn-block col-12" (click)="openTimeLine()">{{ticket.time}}</button>
+      </div>
+    </form>
+  </div>
   <div class="mb-2">
     <app-item-search (onItemSelected)="addItemToTicket($event)" ></app-item-search>
   </div>

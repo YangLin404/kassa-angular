@@ -7,6 +7,7 @@ import {NgbModal, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import {TimeBoxComponent} from '../time-box-component/time-box.component';
 import {TicketService} from '../../components/ticket-component/ticket.service';
 import {ConfirmComponent} from '../../components/confirm-component/confirm.component';
+import {TimeBoxService} from '../time-box-component/time-box.service';
 
 @Component({
   selector: 'app-takeaway',
@@ -23,6 +24,7 @@ export class TakeawayComponent implements OnInit {
 
   constructor(private takeawayService: TakeawayService,
               private ticketService: TicketService,
+              private timeBoxService: TimeBoxService,
               private router: Router,
               private logger: NGXLogger,
               private modalService: NgbModal, ) {}
@@ -33,6 +35,7 @@ export class TakeawayComponent implements OnInit {
         this.tickets = tickets;
         this.setTimesAndName();
       });
+    this.timeBoxService.takenTimes = this.times;
   }
 
   openTimeLine(ticketNr: number) {
@@ -96,7 +99,7 @@ export class TakeawayComponent implements OnInit {
             this.logger.debug('update time to server successfull, now updating local values');
             ticketToUpdate.time = time;
             this.times[ticketNr] = time;
-            this.timeBox.takenTimes = this.times;
+            this.timeBoxService.takenTimes = this.times;
             this.timeBox.updateView();
           }
         });
@@ -127,7 +130,7 @@ export class TakeawayComponent implements OnInit {
       this.tickets.splice(indexTicket, 1);
       this.names.splice(ticketNr, 1);
       this.times.splice(ticketNr, 1);
-      this.timeBox.takenTimes = this.times;
+      this.timeBoxService.takenTimes = this.times;
       this.timeBox.updateView();
     }
   }

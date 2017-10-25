@@ -4,6 +4,7 @@ import {TimeFrame} from './time-frame';
 @Injectable()
 export class TimeBoxService {
   private times: TimeFrame[];
+  takenTimes: string[] = [];
 
   constructor() {
     this.initTimeFrames();

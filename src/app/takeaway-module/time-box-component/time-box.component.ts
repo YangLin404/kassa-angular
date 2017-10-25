@@ -13,7 +13,6 @@ import {isUndefined} from 'util';
 
 export class TimeBoxComponent implements OnInit {
 
-  @Input() takenTimes: string[] = [];
   @Input() isModal: false;
   times: TimeFrame[];
 
@@ -23,8 +22,8 @@ export class TimeBoxComponent implements OnInit {
 
   ngOnInit(): void {
     this.times = this.timeBoxService.getTimeFrames();
-    this.logger.debug('takentimes oninit: ' + this.takenTimes);
-    if (this.takenTimes !== null || this.takenTimes.length !== 0) {
+    this.logger.debug('takentimes oninit: ' + this.timeBoxService.takenTimes);
+    if (this.timeBoxService.takenTimes !== null || this.timeBoxService.takenTimes.length !== 0) {
       this.registerTakenTime();
     }
   }
@@ -40,10 +39,10 @@ export class TimeBoxComponent implements OnInit {
 
   private registerTakenTime(): void {
     this.times = this.timeBoxService.getTimeFrames();
-    this.takenTimes.forEach(takenTime => {
+    this.timeBoxService.takenTimes.forEach(takenTime => {
       this.changeTimeFrameStatus(takenTime, true);
     });
-    this.logger.debug('taken time after registertion: ' + this.takenTimes);
+    this.logger.debug('taken time after registertion: ' + this.timeBoxService.takenTimes);
     this.logger.debug('times after registretion: ' + JSON.stringify(this.times));
   }
 

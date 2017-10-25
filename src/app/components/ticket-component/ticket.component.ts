@@ -9,6 +9,7 @@ import {TicketSummary} from './ticket-summary';
 import {NGXLogger} from 'ngx-logger';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TicketPaymentComponent} from '../ticket-payment-component/ticket-payment.component';
+import {TimeBoxComponent} from '../../takeaway-module/time-box-component/time-box.component';
 
 @Component({
   selector: 'app-ticket',
@@ -70,6 +71,41 @@ export class TicketComponent implements OnInit {
         this.payTicket(result);
       }
     });
+  }
+
+  openTimeLine() {
+    const modalRef = this.modalService.open(TimeBoxComponent);
+    modalRef.componentInstance.takenTimes = this.ticket.time;
+    modalRef.componentInstance.isModal = true;
+    modalRef.result
+      .then(result => {
+        if (result !== 'close') {
+          this.updateTicketTime(result);
+        }
+      });
+  }
+
+  updateTicketTime(time: string): void {
+    if (this.ticket.time !== time) {
+      this.ticketService.updateTicketTime(this.ticket.ticketNr, time)
+        .then(success => {
+          if (success) {
+            this.logger.debug('update time to server successfull, now updating local values');
+            this.ticket.time = time;
+          }
+        });
+    }
+  }
+
+  updateTicketName(name: string): void {
+    if (this.ticket.name !== name) {
+      this.ticketService.updateTicketName(this.ticket.ticketNr, name)
+        .then(success => {
+          if (success) {
+            this.ticket.name = name;
+          }
+        });
+    }
   }
 
   private reloadTicket(): void {
