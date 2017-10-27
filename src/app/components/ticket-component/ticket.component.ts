@@ -80,7 +80,11 @@ export class TicketComponent implements OnInit {
     this.ticketService.payTicket(this.ticket.ticketNr, payMethod)
       .then(paid => {
         if (paid) {
-          this.location.back();
+          if (this.isModal) {
+            this.activeModal.close();
+          } else {
+            this.location.back();
+          }
         }
       });
   }

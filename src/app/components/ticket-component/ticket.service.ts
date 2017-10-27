@@ -4,15 +4,19 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Ticket} from './ticket';
 import {NGXLogger} from 'ngx-logger';
+import {ConfigService} from '../../config-component/config.service';
 
 
 @Injectable()
 export class TicketService {
-  private baseUrl = 'http://localhost:7777/api/';
+  private baseUrl: string;
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http,
-              private logger: NGXLogger) {}
+              private logger: NGXLogger,
+              private configService: ConfigService) {
+    this.baseUrl = configService.getRestAPIBaseUrl();
+  }
 
   getTicketByNr(ticketNr: number): Promise<Ticket> {
     const url = this.baseUrl + 'getTodayTicketByNr?ticketNr=' + ticketNr;

@@ -3,13 +3,16 @@ import {Injectable} from '@angular/core';
 import {Ticket} from '../../components/ticket-component/ticket';
 import {Http, Headers} from '@angular/http';
 import {NGXLogger} from 'ngx-logger';
+import {ConfigService} from '../../config-component/config.service';
 
 @Injectable()
 export class TakeawayService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private baseUrl = 'http://localhost:7777/api/takeaway/';
+  private baseUrl: string;
 
-  constructor(private http: Http, private logger: NGXLogger) {}
+  constructor(private http: Http, private logger: NGXLogger, private configService: ConfigService) {
+    this.baseUrl = configService.getRestAPIBaseUrl() + 'takeaway/';
+  }
 
   getTakeawayTickets(): Promise<Ticket[]> {
     const url = this.baseUrl + 'getTodaysTakeawayTicket';

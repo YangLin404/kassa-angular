@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {RestoItem} from './resto-item';
+import {ConfigService} from "../../config-component/config.service";
 
 
 @Injectable()
 export class ItemSearchService {
-  private baseUrl = 'http://localhost:7777/api/';
+  private baseUrl: string;
   private items: RestoItem[] = [];
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private configService: ConfigService) {
+    this.baseUrl = configService.getRestAPIBaseUrl();
     this.getItemsFromServer()
       .then(items => this.items = items)
       .catch(this.handleError);

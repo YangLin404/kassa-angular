@@ -13,7 +13,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {ItemSearchComponent} from './components/item-search-component/item-search.component';
 import {RestoComponent} from './components/resto-component/resto.component';
 import {RestoService} from './components/resto-component/resto.service';
-import {FormsModule, NgControl, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 import {TicketService} from './components/ticket-component/ticket.service';
@@ -22,14 +22,12 @@ import {LoggerModule, NGXLogger, NgxLoggerLevel} from 'ngx-logger';
 import {TicketItemSortPipe} from './components/ticket-component/ticket-item-sort.pipe';
 import {TicketPaymentComponent} from './components/ticket-payment-component/ticket-payment.component';
 import {NgbModalStack} from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
-import {TakeawayComponent} from './takeaway-module/takeaway-component/takeaway.component';
-import {TakeawayService} from './takeaway-module/takeaway-component/takeaway.service';
-import {TakeawayTicketSortPipe} from './takeaway-module/takeaway-component/takeaway-ticket-sort.pipe';
 import {TakeawayModule} from './takeaway-module/takeaway.module';
 import {ConfirmComponent} from './components/confirm-component/confirm.component';
 import {OverviewModule} from './overview-module/overview.module';
 import {TicketItemRemarkComponent} from './components/ticket-item-remark-component/ticket-item-remark.component';
 import {TicketItemRemarkService} from './components/ticket-item-remark-component/ticket-item-remark.service';
+import {ConfigService} from './config-component/config.service';
 
 
 @NgModule({
@@ -61,7 +59,7 @@ import {TicketItemRemarkService} from './components/ticket-item-remark-component
     TakeawayModule,
     OverviewModule
   ],
-  providers: [ItemSearchService, RestoService, TicketService, TicketItemRemarkService
+  providers: [ConfigService, ItemSearchService, RestoService, TicketService, TicketItemRemarkService
     , NgbAccordionConfig, NgbDropdownConfig, NgbTypeaheadConfig, NgbTimepickerConfig, NgbModal, NgbModalStack
     , NGXLogger],
   bootstrap: [AppComponent]

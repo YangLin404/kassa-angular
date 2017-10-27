@@ -4,14 +4,16 @@ import {NGXLogger} from 'ngx-logger';
 import {Http} from '@angular/http';
 import {isUndefined} from 'util';
 import {Injectable} from '@angular/core';
+import {ConfigService} from '../../config-component/config.service';
 
 @Injectable()
 export class TicketItemRemarkService {
 
-  private baseUrl = 'http://localhost:7777/api/';
+  private baseUrl: string;
   extras: ItemExtra[];
 
-  constructor(private http: Http, private logger: NGXLogger) {
+  constructor(private http: Http, private logger: NGXLogger, private configService: ConfigService) {
+    this.baseUrl = configService.getRestAPIBaseUrl();
     this.retrieveExtras()
       .then(extras => this.extras = extras);
   }

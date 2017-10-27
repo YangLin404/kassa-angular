@@ -3,15 +3,18 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {RestoTable} from '../resto-tabel-component/resto-table';
+import {ConfigService} from '../../config-component/config.service';
 
 
 @Injectable()
 export class RestoService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private baseUrl = 'http://localhost:7777/api/';
+  private baseUrl: string;
   private tables: RestoTable[] = [];
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private configService: ConfigService) {
+    this.baseUrl = configService.getRestAPIBaseUrl();
+  }
 
   getTables(): Promise<RestoTable[]> {
     const url = this.baseUrl + 'getTables';
