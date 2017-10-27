@@ -1,7 +1,9 @@
 
 
+import {Ticket} from '../ticket-component/ticket';
+
 export class RestoTable {
   tableNr: string;
-  ticket: any;
+  ticket: Ticket;
   ticketNr: number;
 }

@@ -13,6 +13,7 @@ import {NGXLogger} from 'ngx-logger';
 export class TicketItemRemarkComponent implements OnInit {
 
   @Input() item: TicketItem;
+  @Input() isMainDishe: boolean;
   extras: ItemExtra[];
 
   constructor(public activeModal: NgbActiveModal,

@@ -5,7 +5,7 @@
   </button>
 </div>
 <div class="modal-body">
-  <div *ngIf="extras">
+  <div *ngIf="extras && isMainDishe">
     <button *ngFor="let extra of extras"
             class="btn btn-outline-primary mr-1"
             [class.active]="containsExtra(extra.name)"

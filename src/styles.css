@@ -6,3 +6,8 @@
 body {
   overflow-x: hidden;
 }
+
+.modal-xl .modal-lg {
+  max-width: 80%;
+  overflow-y: auto;
+}

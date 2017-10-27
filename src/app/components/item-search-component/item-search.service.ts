@@ -32,6 +32,10 @@ export class ItemSearchService {
       .catch(this.handleError);
   }
 
+  findItemByQuicklink(quicklink: string): RestoItem {
+    return this.items.find(i => i.quicklink === quicklink);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

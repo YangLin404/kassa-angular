@@ -13,5 +13,10 @@ export class Ticket {
   isTaken: boolean;
   isPaid: boolean;
   items: TicketItem[] = [];
+  totalPriceWithTax: number;
+  totalPriceWithoutTax: number;
+  totalTaxDrink: number;
+  totalTaxFood: number;
+  totalTaxTakeaway: number;
 
 }

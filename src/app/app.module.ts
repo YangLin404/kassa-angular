@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import {
-  NgbAccordionConfig, NgbDropdownConfig, NgbModal, NgbModule, NgbTimepickerConfig, NgbTypeahead,
+  NgbAccordionConfig, NgbDatepicker, NgbDropdownConfig, NgbModal, NgbModule, NgbTimepickerConfig, NgbTypeahead,
   NgbTypeaheadConfig
 } from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -56,7 +56,7 @@ import {TicketItemRemarkService} from './components/ticket-item-remark-component
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NgbModule,
+    NgbModule.forRoot(),
     LoggerModule.forRoot({level: NgxLoggerLevel.INFO, serverLogLevel: NgxLoggerLevel.ERROR}),
     TakeawayModule,
     OverviewModule

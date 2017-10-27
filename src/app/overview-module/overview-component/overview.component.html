@@ -1,1 +1,17 @@
-<app-overview-result></app-overview-result>
+<div class="container-fluid overviewContent">
+  <form class="form-inline">
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd"
+               name="dp" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker" #dateInput>
+        <a class="input-group-addon" (click)="d.toggle()">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="date" class="container-fluid mt-2 p-0">
+    <app-overview-result [date]="date"></app-overview-result>
+  </div>
+</div>
+

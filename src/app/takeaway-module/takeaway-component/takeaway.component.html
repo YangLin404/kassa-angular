@@ -5,7 +5,7 @@
     </aside>
     <main class="col-sm-10 col-md-11 bg-faded py-3">
       <div>
-        <button (click)="createTicket()" class="btn btn-lg btn-primary btn-block fixed-top nieuweTakeAwayTicketBtn">Nieuw ticket</button>
+        <button (click)="createTicket()" class="btn btn-lg btn-primary btn-block fixed-top nieuweTakeAwayTicketBtn"><i class="fa fa-plus" aria-hidden="true"></i> Nieuw ticket</button>
       </div>
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6" *ngFor="let ticket of tickets | takeawayTicketSortByTime">
@@ -22,22 +22,23 @@
                        [(ngModel)]="names[ticket.ticketNr]" type="text" class="form-control"/>
               </div>
               <div class="input-group mb-1">
-                <span class="input-group-addon col-3">Tijd</span>
+                <span class="input-group-addon col-3"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                 <button class="btn btn-secondary btn-block" (click)="openTimeLine(ticket.ticketNr)">{{times[ticket.ticketNr]}}</button>
               </div>
-              <div class="col-12">
-                <button class="btn col-md-12 col-xl-5 mr-1" [ngClass]="{'btn-outline-success': ticket.isPaid, 'btn-outline-warning': !ticket.isPaid}" disabled>
+              <div class="row ml-md-0">
+                <button class="btn col-md-11 col-xl-5 mr-1" [ngClass]="{'btn-outline-success': ticket.isPaid, 'btn-outline-warning': !ticket.isPaid}" disabled>
                   {{ticket.isPaid?'Betaald':'Niet betaald'}}
                 </button>
-                <button (click)="takeFood(!ticket.isTaken, ticket.ticketNr)" class="btn col-md-12 col-xl-5" [ngClass]="{'btn-outline-success': ticket.isTaken, 'btn-outline-warning': !ticket.isTaken}">
+                <button (click)="takeFood(!ticket.isTaken, ticket.ticketNr)" class="btn col-md-11 col-xl-6" [ngClass]="{'btn-outline-success': ticket.isTaken, 'btn-outline-warning': !ticket.isTaken}">
                   {{ticket.isTaken?'meegenomen':'in verwerking'}}
                 </button>
               </div>
 
             </div>
             <div class="card-footer">
-              <a [routerLink]="['/ticket', ticket.ticketNr]" class="btn btn-success linkBtn col-9" style="color: white">Open Ticket</a>
-              <button (click)="openConfirmModal(ticket.ticketNr)" class="btn btn-danger col-2">X</button>
+              <a [routerLink]="['/ticket', ticket.ticketNr]" class="btn btn-success linkBtn col-9" style="color: white"><i class="fa fa-external-link" aria-hidden="true"></i> Open Ticket</a>
+              <a (click)="openConfirmModal(ticket.ticketNr)" class="btn btn-danger">
+                <i class="fa fa-trash-o fa-lg" style="color: white"></i></a>
             </div>
           </div>
         </div>

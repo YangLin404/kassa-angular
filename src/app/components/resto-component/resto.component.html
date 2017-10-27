@@ -10,8 +10,11 @@
           <p class="card-text">test</p>
         </div>
         <div class="card-footer">
-          <a *ngIf="table.ticketNr" [routerLink]="['/ticket', table.ticketNr]" class="btn btn-success btn-block linkBtn" style="color: white">open ticket</a>
-          <a *ngIf="!table.ticketNr" (click)="createTicket(table.tableNr)" class="btn btn-primary btn-block linkBtn">nieuwe ticket</a>
+          <div *ngIf="table.ticketNr" class="row">
+            <a [routerLink]="['/ticket', table.ticketNr]" class="btn btn-success btn-block linkBtn col-9 mr-1" style="color: white"><i class="fa fa-external-link" aria-hidden="true"></i> open ticket</a>
+            <button (click)="openConfirmModal(table.ticketNr)" class="btn btn-danger col-2">X</button>
+          </div>
+          <a *ngIf="!table.ticketNr" (click)="createTicket(table.tableNr)" class="btn btn-primary btn-block linkBtn">Nieuwe Ticket</a>
         </div>
       </div>
     </div>
