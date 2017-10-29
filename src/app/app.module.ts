@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import {
-  NgbAccordionConfig, NgbDatepicker, NgbDropdownConfig, NgbModal, NgbModule, NgbTimepickerConfig, NgbTypeahead,
+  NgbAccordionConfig, NgbAlert, NgbDatepicker, NgbDropdownConfig, NgbModal, NgbModule, NgbTimepickerConfig,
+  NgbTypeahead,
   NgbTypeaheadConfig
 } from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -28,6 +29,7 @@ import {OverviewModule} from './overview-module/overview.module';
 import {TicketItemRemarkComponent} from './components/ticket-item-remark-component/ticket-item-remark.component';
 import {TicketItemRemarkService} from './components/ticket-item-remark-component/ticket-item-remark.service';
 import {ConfigService} from './config-component/config.service';
+import {ConfigComponent} from './config-component/config.component';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import {ConfigService} from './config-component/config.service';
     TicketPaymentComponent,
     TicketItemSortPipe,
     ConfirmComponent,
-    TicketItemRemarkComponent
+    TicketItemRemarkComponent,
+    ConfigComponent
   ],
   entryComponents: [
     TicketPaymentComponent,
@@ -60,7 +63,7 @@ import {ConfigService} from './config-component/config.service';
     OverviewModule
   ],
   providers: [ConfigService, ItemSearchService, RestoService, TicketService, TicketItemRemarkService
-    , NgbAccordionConfig, NgbDropdownConfig, NgbTypeaheadConfig, NgbTimepickerConfig, NgbModal, NgbModalStack
+    , NgbAccordionConfig, NgbDropdownConfig, NgbTypeaheadConfig, NgbTimepickerConfig, NgbModal, NgbModalStack, NgbAlert
     , NGXLogger],
   bootstrap: [AppComponent]
 })
