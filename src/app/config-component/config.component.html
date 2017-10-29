@@ -1,0 +1,6 @@
+<div class="content">
+  <ngb-alert *ngIf="message" type="success" (close)="message = null"> {{message}}</ngb-alert>
+  <div>
+    <button class="btn btn-primary" (click)="reloadData()">reload data</button>
+  </div>
+</div>
