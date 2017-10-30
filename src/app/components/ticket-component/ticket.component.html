@@ -2,6 +2,7 @@
   <button (click)="activeModal.close()" *ngIf="isModal" class=" col-3 btn btn-lg btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></button>
   <div class="mt-2 mb-3">
     <form class="form-inline">
+      <h5 class="mr-2" *ngIf="ticket.tableNr">Tafel: {{ticket.tableNr}}</h5>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
         <div class="input-group-addon">Naam</div>
         <input #nameInput type="text" class="form-control" id="inlineFormInputGroup" placeholder="Klant naam"
@@ -22,8 +23,8 @@
   <table class="table table-sm table-bordered table-hover">
     <thead class="thead-default">
     <tr>
-      <th>Nummer</th>
-      <th>Aantal</th>
+      <th>Nr</th>
+      <th>#</th>
       <th></th>
       <th>Beschrijving</th>
       <th>Opmerking</th>
@@ -60,12 +61,12 @@
     </tbody>
   </table>
     <div class="d-flex flex-row-reverse">
-      <div class="col-3 col-sm-5">
+      <div class="col-md-5 col-sm-10">
         <div class="d-flex flex-row">
           <ul class="list-group w-50">
             <li class="list-group-item">Subtotal: </li>
-            <li class="list-group-item">Btw 12%: </li>
-            <li class="list-group-item">Btw 21%: </li>
+            <li class="list-group-item">12%: </li>
+            <li class="list-group-item">21%: </li>
             <li class="list-group-item list-group-item-success">Total: € </li>
           </ul>
           <ul class="list-group w-50">

@@ -6,6 +6,7 @@ import {Http} from '@angular/http';
 @Injectable()
 export class ConfigService {
   private baseUrl = 'http://redirectme.ddns.net:7777/api/';
+  // private baseUrl = 'http://localhost:7777/api/';
 
   constructor(private http: Http, private logger: NGXLogger) {}
 

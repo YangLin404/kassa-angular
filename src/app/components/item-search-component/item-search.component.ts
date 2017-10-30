@@ -54,7 +54,6 @@ export class ItemSearchComponent implements OnInit, AfterViewInit {
   }
 
   private resetSearchInput(): void {
-
     this.searchInput.nativeElement.focus();
   }
 }

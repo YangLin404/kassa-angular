@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Ticket} from '../../components/ticket-component/ticket';
 import {TakeawayService} from './takeaway.service';
 import {NGXLogger} from 'ngx-logger';
@@ -18,6 +18,7 @@ import {TimeBoxService} from '../time-box-component/time-box.service';
 export class TakeawayComponent implements OnInit {
 
   @ViewChild('timeBox') timeBox: TimeBoxComponent;
+  screenWidth: number;
   tickets: Ticket[];
   times: string[] = [];
   names: string[] = [];
@@ -30,12 +31,18 @@ export class TakeawayComponent implements OnInit {
               private modalService: NgbModal, ) {}
 
   ngOnInit(): void {
+    this.screenWidth = window.innerWidth;
     this.takeawayService.getTakeawayTickets()
       .then(tickets => {
         this.tickets = tickets;
         this.setTimesAndName();
       });
     this.timeBoxService.takenTimes = this.times;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.screenWidth = window.innerWidth;
   }
 
   openTimeLine(ticketNr: number) {
