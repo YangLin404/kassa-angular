@@ -94,10 +94,18 @@ export class OverviewResultComponent implements OnInit{
       this.overviewSummary.totalTaxLv3 += ticket.totalTaxDrink;
       this.overviewSummary.total += ticket.totalPriceWithTax;
       this.overviewSummary.totalWithoutTax += ticket.totalPriceWithoutTax;
+      this.overviewSummary.totalDrink += ticket.totalDrink;
+      this.overviewSummary.totalFood += ticket.totalFood;
       if (ticket.payMethod === 'Cash') {
         this.overviewSummary.totalCash += ticket.totalPriceWithTax;
       } else if (ticket.payMethod === 'Card') {
         this.overviewSummary.totalCard += ticket.totalPriceWithTax;
+      }
+
+      if (ticket.ticketType === 'Takeaway') {
+        this.overviewSummary.totalTakeaway += ticket.totalPriceWithTax;
+      } else {
+        this.overviewSummary.totalResto += ticket.totalPriceWithTax;
       }
     }
   }

@@ -1,5 +1,8 @@
 import {NgModule} from '@angular/core';
-import {NgbActiveModal, NgbDatepicker, NgbDatepickerConfig, NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbActiveModal, NgbDatepicker, NgbDatepickerConfig, NgbModal, NgbModule,
+  NgbTooltip
+} from '@ng-bootstrap/ng-bootstrap';
 import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
@@ -31,7 +34,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
 
   providers: [OverviewResultService,
-    NgbModal, NgbModalStack, NgbActiveModal, NgbDatepickerConfig, NgbDatepicker]
+    NgbModal, NgbModalStack, NgbActiveModal, NgbDatepickerConfig, NgbDatepicker, NgbTooltip]
 })
 
 export class OverviewModule { }

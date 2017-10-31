@@ -7,12 +7,14 @@
           <h4 class="card-title">Tafel: {{table.tableNr}}</h4>
         </div>
         <div class="card-block">
-          <p class="card-text">test</p>
+          <p class="card-text"></p>
         </div>
         <div class="card-footer">
           <div *ngIf="table.ticketNr" class="row">
             <a [routerLink]="['/ticket', table.ticketNr]" class="btn btn-success btn-block linkBtn col-9 mr-1" style="color: white"><i class="fa fa-external-link" aria-hidden="true"></i> open ticket</a>
-            <button (click)="openConfirmModal(table.ticketNr)" class="btn btn-danger col-2">X</button>
+            <a (click)="openConfirmModal(table.ticketNr)" class="btn btn-danger">
+              <i class="fa fa-trash-o fa-lg" style="color: white"></i>
+            </a>
           </div>
           <a *ngIf="!table.ticketNr" (click)="createTicket(table.tableNr)" class="btn btn-primary btn-block linkBtn">Nieuwe Ticket</a>
         </div>
