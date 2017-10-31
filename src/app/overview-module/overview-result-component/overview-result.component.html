@@ -13,7 +13,7 @@
         <div class="card-block">
           <blockquote class="card-blockquote">
             <h5><i class="fa fa-eur " aria-hidden="true"></i> {{overviewSummary.totalCash.toFixed(2)}}</h5>
-            <footer><i class="fa fa-money" aria-hidden="true"></i> Total Cash</footer>
+            <footer><i class="fa fa-money" aria-hidden="true"></i> Cash</footer>
           </blockquote>
         </div>
       </div>
@@ -21,14 +21,42 @@
         <div class="card-block">
           <blockquote class="card-blockquote">
             <h5><i class="fa fa-eur " aria-hidden="true"></i> {{overviewSummary.totalCard.toFixed(2)}}</h5>
-            <footer><i class="fa fa-credit-card" aria-hidden="true"></i> Total Card</footer>
+            <footer><i class="fa fa-credit-card" aria-hidden="true"></i> Card</footer>
           </blockquote>
         </div>
       </div>
+      <div class="card card-inverse card-info col-lg-2 col-md-3 col-sm-4 mr-1 mb-1">
+        <div class="card-block">
+          <blockquote class="card-blockquote">
+            <h5><i class="fa fa-eur " aria-hidden="true"></i> {{overviewSummary.totalTakeaway.toFixed(2)}}</h5>
+            <footer><i class="fa fa-car" aria-hidden="true"></i> Meeneem</footer>
+          </blockquote>
+        </div>
+      </div>
+      <div class="card card-inverse card-info col-lg-2 col-md-3 col-sm-4 mr-1 mb-1">
+        <div class="card-block">
+          <blockquote class="card-blockquote">
+            <h5><i class="fa fa-eur " aria-hidden="true"></i> {{overviewSummary.totalResto.toFixed(2)}}</h5>
+            <footer><i class="fa fa-cutlery" aria-hidden="true"></i> Resto</footer>
+          </blockquote>
+        </div>
+      </div>
+
     </div>
     <hr>
     <div class="row">
       <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6" *ngFor="let ticket of tickets" >
+        <ng-template #ticketDetailTooltip>
+          <div [ngSwitch]="ticket.ticketType">
+            <div *ngSwitchCase="'Takeaway'">
+              <p>6%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalPriceWithTax}}</p>
+            </div>
+            <div *ngSwitchCase="'Resto'">
+              <p>12%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalFood}}</p>
+              <p>21%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalDrink}}</p>
+            </div>
+          </div>
+        </ng-template>
         <div class="card table-card">
           <div class="card-block">
             <div class="input-group mb-1">
@@ -39,15 +67,23 @@
               <span class="input-group-addon col-3"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
               <button class="btn btn-secondary btn-block" disabled>{{ticket.time}}</button>
             </div>
-            <div [ngSwitch]="ticket.payMethod" class="row ml-md-0">
-              <div class="col-auto">
-                <button *ngSwitchCase="'None'" class="btn btn-warning" disabled>Niet betaald</button>
-                <button *ngSwitchCase="'Card'" class="btn btn-success" disabled>
-                  <i class="fa fa-credit-card" aria-hidden="true"></i> {{ticket.payMethod}}
-                </button>
-                <button *ngSwitchCase="'Cash'" class="btn btn-primary" disabled>
-                  <i class="fa fa-eur" aria-hidden="true"></i> {{ticket.payMethod}}
-                </button>
+            <div class="row ml-md-0">
+              <div [ngSwitch]="ticket.ticketType === 'Takeaway'" class="col-auto mr-1">
+                <h2 *ngSwitchCase="true"><span class="badge badge-info"><i class="fa fa-car" aria-hidden="true"></i></span></h2>
+                <h2 *ngSwitchCase="false"><span class="badge badge-info"><i class="fa fa-cutlery" aria-hidden="true"></i></span></h2>
+              </div>
+              <div [ngSwitch]="ticket.payMethod" class="col-auto" [ngbTooltip]="ticketDetailTooltip">
+                <h2 *ngSwitchCase="'None'"><span class="badge badge-warning">Niet betaald</span></h2>
+                <h2 *ngSwitchCase="'Card'">
+                  <span class="badge badge-primary">
+                    <i class="fa fa-credit-card" aria-hidden="true"></i> {{ticket.payMethod}}
+                  </span>
+                </h2>
+                <h2 *ngSwitchCase="'Cash'">
+                  <span class="badge badge-success">
+                    <i class="fa fa-money" aria-hidden="true"></i> {{ticket.payMethod}}
+                  </span>
+                </h2>
               </div>
               <div class="col-auto">
 

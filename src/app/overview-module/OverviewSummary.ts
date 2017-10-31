@@ -7,6 +7,10 @@ export class OverviewSummary {
   totalTaxLv3 = 0;
   totalCash = 0;
   totalCard = 0;
+  totalTakeaway = 0;
+  totalResto = 0;
+  totalDrink = 0;
+  totalFood = 0;
 
   reset() {
     this.total = 0;
@@ -17,5 +21,9 @@ export class OverviewSummary {
     this.totalTaxLv3 = 0;
     this.totalCard = 0;
     this.totalCash = 0;
+    this.totalTakeaway = 0;
+    this.totalResto = 0;
+    this.totalDrink = 0;
+    this.totalFood = 0;
   }
 }

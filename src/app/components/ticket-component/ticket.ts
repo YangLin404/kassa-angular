@@ -18,5 +18,7 @@ export class Ticket {
   totalTaxDrink: number;
   totalTaxFood: number;
   totalTaxTakeaway: number;
+  totalDrink: number;
+  totalFood: number;
 
 }
