@@ -1,8 +1,9 @@
 <div *ngIf="ticket" class="container-fluid" [class.content]="!isModal" [class.pt-2]="isModal">
+  <ngb-alert *ngIf="alertMsg" type="success" (close)="alertMsg = null"><i class="fa fa-check" aria-hidden="true"></i> {{alertMsg}}</ngb-alert>
   <button (click)="activeModal.close()" *ngIf="isModal" class=" col-3 btn btn-lg btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></button>
   <div class="mt-2 mb-3">
     <form class="form-inline">
-      <h5 class="mr-2" *ngIf="ticket.tableNr">Tafel: {{ticket.tableNr}}</h5>
+      <button class="mr-2 btn btn-outline-primary" (click)="openMoveTableModal(ticket.tableNr)" *ngIf="ticket.tableNr">Tafel: {{ticket.tableNr}}</button>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
         <div class="input-group-addon">Naam</div>
         <input #nameInput type="text" class="form-control" id="inlineFormInputGroup" placeholder="Klant naam"

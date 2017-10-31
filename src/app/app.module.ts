@@ -30,6 +30,7 @@ import {TicketItemRemarkComponent} from './components/ticket-item-remark-compone
 import {TicketItemRemarkService} from './components/ticket-item-remark-component/ticket-item-remark.service';
 import {ConfigService} from './config-component/config.service';
 import {ConfigComponent} from './config-component/config.component';
+import {MoveTableComponent} from "./components/move-table-component/move-table.component";
 
 
 @NgModule({
@@ -42,12 +43,14 @@ import {ConfigComponent} from './config-component/config.component';
     TicketItemSortPipe,
     ConfirmComponent,
     TicketItemRemarkComponent,
-    ConfigComponent
+    ConfigComponent,
+    MoveTableComponent
   ],
   entryComponents: [
     TicketPaymentComponent,
     ConfirmComponent,
-    TicketItemRemarkComponent
+    TicketItemRemarkComponent,
+    MoveTableComponent
   ],
 
   imports: [

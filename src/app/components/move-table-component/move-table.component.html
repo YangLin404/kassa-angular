@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h4 class="modal-title">Hi there! Tafel nummer veranderen.</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div *ngIf="tables" class="modal-body">
+  <div class="row">
+    <div class="card col-md-6 col-lg-4 col-xl-3 col-sm-12" *ngFor="let table of tables">
+      <button class="btn btn-{{table.tableNr === tableToMove ? 'success' : 'primary'}}" (click)="activeModal.close(table.tableNr)"><h4 class="card-title">Tafel: {{table.tableNr}}</h4></button>
+    </div>
+  </div>
+</div>

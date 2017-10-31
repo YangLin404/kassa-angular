@@ -14,6 +14,10 @@ import {TicketItemRemarkComponent} from '../ticket-item-remark-component/ticket-
 import {TicketItem} from '../item-search-component/ticket-item';
 import {TicketItemRemarkService} from '../ticket-item-remark-component/ticket-item-remark.service';
 import {ItemSearchService} from '../item-search-component/item-search.service';
+import {RestoService} from '../resto-component/resto.service';
+import {MoveTableComponent} from '../move-table-component/move-table.component';
+import {Subject} from 'rxjs/Subject';
+import {debounceTime} from 'rxjs/operator/debounceTime';
 
 @Component({
   selector: 'app-ticket',
@@ -27,8 +31,11 @@ export class TicketComponent implements OnInit {
   ticketSummary: TicketSummary = new TicketSummary();
   isModal = false;
   ticketNr: number;
+  alertMsg: string;
+  private _success = new Subject<string>();
 
   constructor(
+    private restoService: RestoService,
     private ticketService: TicketService,
     private itemSearchService: ItemSearchService,
     private ticketItemRemarkService: TicketItemRemarkService,
@@ -54,8 +61,9 @@ export class TicketComponent implements OnInit {
           this.calcTicketSummary();
         });
       }
-
     }
+    this._success.subscribe((message) => this.alertMsg = message);
+    debounceTime.call(this._success, 3000).subscribe(() => this.alertMsg = null);
   }
 
   addItemToTicket(quicklink: string): void {
@@ -127,6 +135,27 @@ export class TicketComponent implements OnInit {
             }
           }
         });
+  }
+
+  openMoveTableModal(fromTable: string) {
+    const modalRef = this.modalService.open(MoveTableComponent, {size: 'lg'});
+    this.restoService.getTables()
+      .then(tables => {
+        modalRef.componentInstance.tableToMove = this.ticket.tableNr;
+        modalRef.componentInstance.tables = tables;
+      });
+    modalRef.result
+      .then(result => {
+        if (result !== 'close') {
+          this.restoService.moveTable(fromTable, result)
+            .then(success => {
+              if (success) {
+                this.showAlert('Tafel verplaatsting is gelukt!');
+                this.ticket.tableNr = result;
+              }
+            });
+        }
+      });
   }
 
   private addExtraToItem(ticketItem: TicketItem, extra: string) {
@@ -211,5 +240,10 @@ export class TicketComponent implements OnInit {
 
   private isMainDishe(quicklink: string): boolean {
     return this.itemSearchService.findItemByQuicklink(quicklink).itemType === 'MainDishe';
+  }
+
+  private showAlert(msg: string) {
+    this._success.next(msg);
+
   }
 }
