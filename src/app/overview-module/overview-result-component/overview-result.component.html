@@ -49,11 +49,11 @@
         <ng-template #ticketDetailTooltip>
           <div [ngSwitch]="ticket.ticketType">
             <div *ngSwitchCase="'Takeaway'">
-              <p>6%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalPriceWithTax}}</p>
+              <p>6%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalPriceWithTax.toFixed(2)}}</p>
             </div>
             <div *ngSwitchCase="'Resto'">
-              <p>12%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalFood}}</p>
-              <p>21%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalDrink}}</p>
+              <p>12%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalFood.toFixed(2)}}</p>
+              <p>21%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalDrink.toFixed(2)}}</p>
             </div>
           </div>
         </ng-template>
