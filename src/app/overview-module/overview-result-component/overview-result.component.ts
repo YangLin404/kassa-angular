@@ -28,7 +28,6 @@ export class OverviewResultComponent implements OnInit{
               private ticketService: TicketService) {}
 
   ngOnInit(): void {
-    this.reloadTickets();
   }
 
   openConfirmModal(ticketNr: number): void {
