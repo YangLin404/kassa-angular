@@ -1,12 +1,14 @@
 
 import {Injectable} from '@angular/core';
 import {NGXLogger} from 'ngx-logger';
-import {Http} from '@angular/http';
+import {Http, Headers} from '@angular/http';
+import {RestoItem} from '../components/item-search-component/resto-item';
 
 @Injectable()
 export class ConfigService {
-  // private baseUrl = 'http://redirectme.ddns.net:7777/api/';
-   private baseUrl = 'http://localhost:7777/api/';
+  private baseUrl = 'http://redirectme.ddns.net:7777/api/';
+  // private baseUrl = 'http://localhost:7777/api/';
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http, private logger: NGXLogger) {}
 
@@ -20,6 +22,14 @@ export class ConfigService {
       .toPromise()
       .then(response => response.json() as boolean)
       .catch(this.handleError);
+  }
+
+  addItemToMenu(item: RestoItem): Promise<boolean> {
+    const url = this.baseUrl + 'config/menu/item';
+    return this.http.post(url, JSON.stringify(item), {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as boolean);
+
   }
 
   private handleError(error: any): Promise<any> {
