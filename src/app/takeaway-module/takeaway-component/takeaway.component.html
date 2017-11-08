@@ -8,8 +8,15 @@
         <button (click)="createTicket()" class="btn btn-lg btn-primary btn-block fixed-top nieuweTakeAwayTicketBtn"><i class="fa fa-plus" aria-hidden="true"></i> Nieuw ticket</button>
       </div>
       <div class="row">
+        <div class="col-12 mb-lg-2 mb-md-1">
+          <span>
+            <i *ngIf="!showTakenTicket" (click)="hideTakeaway(true)" class="fa fa-square-o" aria-hidden="true" style=" vertical-align: middle;"></i>
+            <i *ngIf="showTakenTicket" (click)="hideTakeaway(false)" class="fa fa fa-check-square-o" aria-hidden="true" style=" vertical-align: middle;"></i>
+            Meegenomen ticket</span>
+        </div>
+        <hr>
         <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6" *ngFor="let ticket of tickets | takeawayTicketSortByTime">
-          <div class="card table-card">
+          <div *ngIf="(!ticket.isTaken) || showTakenTicket" class="card table-card">
             <div class="card-block">
               <div class="input-group mb-1">
                 <span class="input-group-addon col-3">Naam</span>

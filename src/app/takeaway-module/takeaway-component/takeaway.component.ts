@@ -22,6 +22,7 @@ export class TakeawayComponent implements OnInit {
   tickets: Ticket[];
   times: string[] = [];
   names: string[] = [];
+  showTakenTicket = false;
 
   constructor(private takeawayService: TakeawayService,
               private ticketService: TicketService,
@@ -131,6 +132,10 @@ export class TakeawayComponent implements OnInit {
           }
         });
     }
+  }
+
+  hideTakeaway(hide: boolean): void {
+    this.showTakenTicket = hide;
   }
 
   private findTicketByNr(ticketNr: number): Ticket {
