@@ -19,13 +19,13 @@
               </div>
               <div class="input-group mb-1">
                 <span class="input-group-addon col-3"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
-                <button class="btn btn-secondary btn-block" (click)="openTimeLine(ticket.ticketNr)">{{times[ticket.ticketNr]}}</button>
+                <button class="btn btn-secondary btn-block" (click)="openTimeLine(ticket.ticketNr)">{{ticket.time}}</button>
               </div>
               <div class="row ml-md-0">
-                <button class="btn col-md-11 col-xl-5 mr-1 mb-1" [ngClass]="{'btn-outline-success': ticket.isPaid, 'btn-outline-warning': !ticket.isPaid}" disabled>
-                  {{ticket.isPaid?'Betaald':'Niet betaald'}}
+                <button *ngIf="ticket.isPaid" class="btn col-md-11 col-xl-5 mr-1 mb-1" [ngClass]="{'btn-outline-success': ticket.isPaid, 'btn-outline-warning': !ticket.isPaid}" disabled>
+                  Betaald
                 </button>
-                <button (click)="takeFood(!ticket.isTaken, ticket.ticketNr)" class="btn col-md-11 col-xl-6" [ngClass]="{'btn-outline-success': ticket.isTaken, 'btn-outline-warning': !ticket.isTaken}">
+                <button (click)="takeFood(!ticket.isTaken, ticket.ticketNr, ticket.time)" class="btn col-md-11 col-xl-6" [ngClass]="{'btn-outline-success': ticket.isTaken, 'btn-outline-warning': !ticket.isTaken}">
                   {{ticket.isTaken?'meegenomen':'in verwerking'}}
                 </button>
               </div>

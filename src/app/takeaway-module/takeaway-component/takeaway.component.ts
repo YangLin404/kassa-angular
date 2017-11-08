@@ -113,7 +113,7 @@ export class TakeawayComponent implements OnInit {
     }
   }
 
-  takeFood(taken: boolean, ticketNr: number): void {
+  takeFood(taken: boolean, ticketNr: number, time: string): void {
     const ticketToUpdate = this.findTicketByNr(ticketNr);
     if (ticketToUpdate.isTaken !== taken) {
       this.takeawayService.updateTicketTakenStat(ticketNr, taken)
@@ -121,6 +121,13 @@ export class TakeawayComponent implements OnInit {
           if (success) {
             this.logger.debug('update taken to server successfull, now updating local values');
             ticketToUpdate.isTaken = taken;
+            if (taken) {
+              this.times.splice(ticketNr, 1);
+            } else {
+              this.times[ticketNr] = time;
+            }
+            this.timeBoxService.takenTimes = this.times;
+            this.timeBox.updateView();
           }
         });
     }
