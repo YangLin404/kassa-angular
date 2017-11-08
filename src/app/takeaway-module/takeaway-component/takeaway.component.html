@@ -15,8 +15,8 @@
             Meegenomen ticket</span>
         </div>
         <hr>
-        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6" *ngFor="let ticket of tickets | takeawayTicketSortByTime">
-          <div *ngIf="(!ticket.isTaken) || showTakenTicket" class="card table-card">
+        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6" *ngFor="let ticket of tickets | takeawayTicketFilterPipe:showTakenTicket | takeawayTicketSortByTime">
+          <div class="card table-card">
             <div class="card-block">
               <div class="input-group mb-1">
                 <span class="input-group-addon col-3">Naam</span>
