@@ -10,11 +10,13 @@ import {AppRoutingModule} from '../app-routing.module';
 import {TimeBoxComponent} from './time-box-component/time-box.component';
 import {TimeBoxService} from './time-box-component/time-box.service';
 import {NgbModalStack} from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
+import {TakeawayTicketFilterPipe} from './takeaway-component/takeaway-ticket-filter.pipe';
 
 @NgModule({
   declarations: [
     TakeawayComponent,
     TakeawayTicketSortPipe,
+    TakeawayTicketFilterPipe,
     TimeBoxComponent,
   ],
 
