@@ -36,7 +36,7 @@ export class ItemSearchComponent implements OnInit, AfterViewInit {
       .debounceTime(100)
       .distinctUntilChanged()
       .map(term => term.length < 1 ? []
-        : this.items.filter(item => this.doesItMatch(item, term)).slice(0, 10))
+        : this.items.filter(item => this.doesItMatch(item, term)).slice(0, 15))
 
    formatter = (x: {quicklink: string}) => '';
 

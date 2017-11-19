@@ -156,7 +156,9 @@ export class TakeawayComponent implements OnInit {
 
   private setTimesAndName(): void {
     this.tickets.forEach(t => {
-      this.times[t.ticketNr] = t.time;
+      if (!t.isTaken) {
+        this.times[t.ticketNr] = t.time;
+      }
       this.names[t.ticketNr] = t.name;
     });
   }
