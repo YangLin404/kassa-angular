@@ -227,12 +227,14 @@ export class TicketComponent implements OnInit {
     this.ticketSummary.reset();
     this.ticket.items.forEach(item => {
       this.ticketSummary.totalPriceWithTax += item.totalPrice;
+      /*
       this.ticketSummary.totalPriceWithoutTax += item.totalPriceWithoutTax;
       if (item.item.itemType === 'Drink') {
         this.ticketSummary.totalTaxDrink += item.totalTax;
       } else {
         this.ticketSummary.totalTaxFood += item.totalTax;
       }
+    */
     });
     this.logger.debug(this.ticketSummary);
     this.logger.debug(this.ticket);
