@@ -26,6 +26,14 @@ export class TicketService {
       .catch(this.handleError);
   }
 
+  getTicketByIdentifier(ticketID: string): Promise<Ticket> {
+    const url = this.baseUrl + 'ticket?ID=' + ticketID;
+    return this.http.get(url)
+      .toPromise()
+      .then((response) => response.json() as Ticket)
+      .catch(this.handleError);
+  }
+
   addItemToTicket(ticketNr: number, quicklink: string): Promise<boolean> {
     const url = this.baseUrl + 'ticket/' + ticketNr + '/addItemToTicket';
     return this.http.post(url, quicklink, {headers: this.headers})
