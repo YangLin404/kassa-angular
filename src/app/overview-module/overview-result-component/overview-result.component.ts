@@ -74,7 +74,8 @@ export class OverviewResultComponent implements OnInit{
   }
 
   private convertDateToString(date: NgbDateStruct): string {
-    return date.year + '-' + date.month + '-' + (date.day < 10 ? '0' + date.day : date.day);
+    const month = date.month < 10 ? '0' + date.month : date.month;
+    return date.year + '-' + month + '-' + (date.day < 10 ? '0' + date.day : date.day);
   }
 
   private reloadTickets() {
