@@ -3,7 +3,7 @@
   <button (click)="activeModal.close()" *ngIf="isModal" class=" col-3 btn btn-lg btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></button>
   <div class="mt-2 mb-3">
     <form class="form-inline">
-      <button class="mr-2 btn btn-outline-primary" (click)="openMoveTableModal(ticket.tableNr)" *ngIf="ticket.tableNr">Tafel: {{ticket.tableNr}}</button>
+      <button class="mr-2 btn btn-outline-primary mb-1" (click)="openMoveTableModal(ticket.tableNr)" *ngIf="ticket.tableNr">Tafel: {{ticket.tableNr}}</button>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
         <div class="input-group-addon">Naam</div>
         <input #nameInput type="text" class="form-control" id="inlineFormInputGroup" placeholder="Klant naam"
@@ -13,10 +13,11 @@
       </div>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
         <span class="input-group-addon">Tijd</span>
-        <button class="btn btn-secondary btn-block col-12" (click)="openTimeLine()">{{ticket.time}}</button>
+        <button class="btn btn-secondary btn-block col-md-12 col-sm-10" (click)="openTimeLine()">{{ticket.time}}</button>
       </div>
     </form>
   </div>
+  <hr>
   <div class="mb-2">
     <app-item-search (onItemSelected)="addItemToTicket($event)" ></app-item-search>
   </div>
@@ -62,36 +63,30 @@
     </tbody>
   </table>
     <div class="d-flex flex-row-reverse">
-      <div class="col-md-5 col-sm-10">
-        <div class="d-flex flex-row">
-          <ul class="list-group w-50">
-            <li class="list-group-item">Subtotal: </li>
-            <li class="list-group-item">12%: </li>
-            <li class="list-group-item">21%: </li>
-            <li class="list-group-item list-group-item-success">Total: € </li>
-          </ul>
-          <ul class="list-group w-50">
-            <li class="list-group-item text-right">€ {{ticketSummary.totalPriceWithoutTax.toFixed(2)}}</li>
-            <li class="list-group-item text-right">€ {{ticketSummary.totalTaxFood.toFixed(2)}}</li>
-            <li class="list-group-item text-right">€ {{ticketSummary.totalTaxDrink.toFixed(2)}}</li>
+      <div class="col-md-4 col-sm-6 pr-0">
+        <div class="d-flex flex-row-reverse">
+          <ul class="list-group col-6">
             <li class="list-group-item list-group-item-success text-right">€ {{ticketSummary.totalPriceWithTax.toFixed(2)}}</li>
+          </ul>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-success">Total: € </li>
           </ul>
         </div>
       </div>
-        <div class="w-25">
-          <div [ngSwitch]="ticket.payMethod" class="half-height">
-            <div *ngSwitchCase="'None'" class="full-height">
-              <button (click)="openPayment()" class="mt-auto btn btn-lg btn-primary btn-block full-height">Betalen</button>
-            </div>
-            <div *ngSwitchCase="'Card'" class="full-height">
-
-            </div>
-            <div *ngSwitchCase="'Cash'" class="full-height">
-
-            </div>
-            <div></div>
+      <div class="col-md-4">
+        <div [ngSwitch]="ticket.payMethod">
+          <div *ngSwitchCase="'None'" class="full-height">
+            <button (click)="openPayment()" class="mt-auto btn btn-lg btn-primary btn-block full-height">Betalen</button>
           </div>
+          <div *ngSwitchCase="'Card'" class="full-height">
+
+          </div>
+          <div *ngSwitchCase="'Cash'" class="full-height">
+
+          </div>
+          <div></div>
         </div>
+      </div>
     </div>
   </div>
 </div>

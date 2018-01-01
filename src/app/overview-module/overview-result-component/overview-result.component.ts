@@ -41,9 +41,9 @@ export class OverviewResultComponent implements OnInit{
       });
   }
 
-  openTicketModal(ticketNr: number): void {
+  openTicketModal(ticketID: string): void {
     const modalRef = this.modalService.open(TicketComponent, {size: 'lg', windowClass: 'modal-xl'});
-    modalRef.componentInstance.ticketNr = ticketNr;
+    modalRef.componentInstance.ticketID = ticketID;
     modalRef.componentInstance.isModal = true;
     modalRef.result
       .then(result => {
