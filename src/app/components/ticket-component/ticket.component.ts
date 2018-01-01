@@ -30,7 +30,7 @@ export class TicketComponent implements OnInit {
   ticket: Ticket;
   ticketSummary: TicketSummary = new TicketSummary();
   isModal = false;
-  ticketNr: number;
+  ticketID: string;
   alertMsg: string;
   private _success = new Subject<string>();
 
@@ -47,7 +47,7 @@ export class TicketComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isModal) {
-      this.ticketService.getTicketByNr(this.ticketNr)
+      this.ticketService.getTicketByIdentifier(this.ticketID)
         .then(ticket => {
           this.ticket = ticket;
           this.calcTicketSummary();
@@ -227,12 +227,14 @@ export class TicketComponent implements OnInit {
     this.ticketSummary.reset();
     this.ticket.items.forEach(item => {
       this.ticketSummary.totalPriceWithTax += item.totalPrice;
+      /*
       this.ticketSummary.totalPriceWithoutTax += item.totalPriceWithoutTax;
       if (item.item.itemType === 'Drink') {
         this.ticketSummary.totalTaxDrink += item.totalTax;
       } else {
         this.ticketSummary.totalTaxFood += item.totalTax;
       }
+    */
     });
     this.logger.debug(this.ticketSummary);
     this.logger.debug(this.ticket);
