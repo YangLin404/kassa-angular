@@ -1,9 +1,9 @@
 <nav class="navbar fixed-top navbar-toggleable-sm navbar-light" style="background-color: #e3f2fd;">
     <div class="navbar-nav mr-auto d-inline">
-      <a class="btn mr-2 btn-outline-primary" routerLink="/tables" routerLinkActive="active"><i class="fa fa-cutlery" aria-hidden="true"></i> {{screenWidth > 575 ? 'restaurant' : ''}}</a>
+      <a class="btn mr-2 btn-outline-primary" routerLink="/tables" routerLinkActive="active"><i class="fa fa-cutlery" aria-hidden="true"></i> {{screenWidth > 575 ? 'Restaurant' : ''}}</a>
       <a class="btn mr-2 btn-outline-primary" routerLink="/takeaway" routerLinkActive="active"><i class="fa fa-car" aria-hidden="true"></i> {{screenWidth > 575 ? 'Meenemen' : ''}}</a>
       <a class="btn mr-2 btn-outline-primary" routerLink="/overview" routerLinkActive="active"><i class="fa fa-bar-chart" aria-hidden="true"></i> {{screenWidth > 575 ? 'Overzicht' : ''}} </a>
-      <a class="btn mr-2 btn-outline-primary" routerLink="/config" routerLinkActive="active">Config</a>
+      <a class="btn mr-2 btn-outline-primary" routerLink="/config" routerLinkActive="active"><i class="fa fa-cogs" aria-hidden="true"></i> {{screenWidth > 575 ? 'Instellingen' : ''}} </a>
     </div>
 </nav>
 <router-outlet></router-outlet>

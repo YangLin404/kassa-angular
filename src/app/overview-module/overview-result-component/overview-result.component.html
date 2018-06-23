@@ -5,7 +5,7 @@
         <div class="card-block">
           <blockquote class="card-blockquote">
             <h5><i class="fa fa-eur " aria-hidden="true"></i> {{overviewSummary.total.toFixed(2)}}</h5>
-            <footer><i class="fa fa-area-chart" aria-hidden="true"></i> Total</footer>
+            <footer><i class="fa fa-area-chart" aria-hidden="true"></i> Totaal</footer>
           </blockquote>
         </div>
       </div>
@@ -29,7 +29,7 @@
         <div class="card-block">
           <blockquote class="card-blockquote">
             <h5><i class="fa fa-eur " aria-hidden="true"></i> {{overviewSummary.totalTakeaway.toFixed(2)}}</h5>
-            <footer><i class="fa fa-car" aria-hidden="true"></i> Meeneem</footer>
+            <footer><i class="fa fa-car" aria-hidden="true"></i> Meenemen</footer>
           </blockquote>
         </div>
       </div>
@@ -37,7 +37,7 @@
         <div class="card-block">
           <blockquote class="card-blockquote">
             <h5><i class="fa fa-eur " aria-hidden="true"></i> {{overviewSummary.totalResto.toFixed(2)}}</h5>
-            <footer><i class="fa fa-cutlery" aria-hidden="true"></i> Resto</footer>
+            <footer><i class="fa fa-cutlery" aria-hidden="true"></i> Restaurant</footer>
           </blockquote>
         </div>
       </div>
@@ -51,9 +51,10 @@
             <div *ngSwitchCase="'Takeaway'">
               <p>6%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalPriceWithTax.toFixed(2)}}</p>
             </div>
-            <div *ngSwitchCase="'Resto'">
+            <div *ngSwitchCase="'Resto'" align="left">
               <p>12%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalFood.toFixed(2)}}</p>
               <p>21%: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalDrink.toFixed(2)}}</p>
+              <p>Tot: <i class="fa fa-eur " aria-hidden="true"></i> {{ticket.totalPriceWithTax.toFixed(2)}}</p>
             </div>
           </div>
         </ng-template>

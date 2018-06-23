@@ -32,7 +32,7 @@ export class OverviewResultComponent implements OnInit{
 
   openConfirmModal(ticketNr: number): void {
     const modalRef = this.modalService.open(ConfirmComponent);
-    modalRef.componentInstance.msg = 'Ben je zeker dat je de ticket wilt verwijderen?';
+    modalRef.componentInstance.msg = 'Ben je zeker dat je dit ticket wilt verwijderen?';
     modalRef.result
       .then(result => {
         if (result === true) {
