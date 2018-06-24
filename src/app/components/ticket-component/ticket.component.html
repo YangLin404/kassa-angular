@@ -7,9 +7,16 @@
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
         <div class="input-group-addon">Naam</div>
         <input #nameInput type="text" class="form-control" id="inlineFormInputGroup" placeholder="Klant naam"
-               name="klantNameInput" [ngModel]="ticket.name"
-               (blur)="updateTicketName(nameInput.value)"
-               (keyup.enter)="updateTicketName(nameInput.value)">
+          name="klantNameInput" [ngModel]="ticket.name"
+          (blur)="updateTicketName(nameInput.value)"
+          (keyup.enter)="updateTicketName(nameInput.value)">
+      </div>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <div class="input-group-addon">Aantal Personen</div>
+        <input #personsInput type="text" class="form-control" type="number"
+          name="AmountPersonsInput" [ngModel]="ticket.amountPersons"
+          (blur)="updateTicketAmountPersons(personsInput.value)"
+          (keyup.enter)="updateTicketAmountPersons(personsInput.value)">
       </div>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
         <span class="input-group-addon">Tijd</span>

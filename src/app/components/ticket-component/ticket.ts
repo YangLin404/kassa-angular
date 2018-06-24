@@ -4,6 +4,7 @@ export class Ticket {
   ticketNr: number;
   ticketIdentifier: string;
   name: string;
+  amountPersons: number;
   date: string;
   time: string;
   status: string;

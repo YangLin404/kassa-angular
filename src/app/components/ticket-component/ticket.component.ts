@@ -194,6 +194,17 @@ export class TicketComponent implements OnInit {
     }
   }
 
+  updateTicketAmountPersons(amountPersons: number): void {
+    if (this.ticket.amountPersons !== amountPersons) {
+      this.ticketService.updateTicketAmountPersons(this.ticket.ticketNr, amountPersons)
+        .then(success => {
+          if (success) {
+            this.ticket.amountPersons = amountPersons;
+          }
+        });
+    }
+  }
+
   updateTicketRemark(ticketItem: TicketItem, remark: string): void {
     if (ticketItem.remark !== remark) {
       this.ticketService.updateTicketItemRemark(this.ticket.ticketNr, ticketItem.item.quicklink, remark)

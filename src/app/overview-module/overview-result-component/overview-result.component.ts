@@ -5,6 +5,7 @@ import {ConfirmComponent} from '../../components/confirm-component/confirm.compo
 import {NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TicketService} from '../../components/ticket-component/ticket.service';
 import {TicketComponent} from '../../components/ticket-component/ticket.component';
+import {TicketPrintComponent} from '../../components/ticket-print-component/ticket-print.component';
 import {OverviewSummary} from '../OverviewSummary';
 
 @Component({
@@ -43,6 +44,16 @@ export class OverviewResultComponent implements OnInit{
 
   openTicketModal(ticketID: string): void {
     const modalRef = this.modalService.open(TicketComponent, {size: 'lg', windowClass: 'modal-xl'});
+    modalRef.componentInstance.ticketID = ticketID;
+    modalRef.componentInstance.isModal = true;
+    modalRef.result
+      .then(result => {
+        this.reloadTickets();
+      });
+  }
+
+  printTicket(ticketID: string): void {
+    const modalRef = this.modalService.open(TicketPrintComponent, {size: 'lg', windowClass: 'modal-xl'});
     modalRef.componentInstance.ticketID = ticketID;
     modalRef.componentInstance.isModal = true;
     modalRef.result

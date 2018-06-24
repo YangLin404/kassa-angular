@@ -6,7 +6,6 @@ import {Ticket} from './ticket';
 import {NGXLogger} from 'ngx-logger';
 import {ConfigService} from '../../config-component/config.service';
 
-
 @Injectable()
 export class TicketService {
   private baseUrl: string;
@@ -63,6 +62,15 @@ export class TicketService {
     const url = this.baseUrl + 'ticket/' + ticketNr + '/name';
     this.logger.log('updating ticket ' + ticketNr + ' name is ' + name);
     return this.http.post(url, name, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as boolean)
+      .catch(this.handleError);
+  }
+
+  updateTicketAmountPersons(ticketNr: number, amountPersons: number): Promise<boolean> {
+    const url = this.baseUrl + 'ticket/' + ticketNr + '/amountPersons';
+    this.logger.log('updating ticket ' + ticketNr + ' amount persons is ' + amountPersons);
+    return this.http.post(url, amountPersons, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as boolean)
       .catch(this.handleError);
