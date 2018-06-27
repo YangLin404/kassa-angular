@@ -66,11 +66,10 @@ export class TicketService {
       .then(response => response.json() as boolean)
       .catch(this.handleError);
   }
-
-  updateTicketAmountPersons(ticketNr: number, amountPersons: number): Promise<boolean> {
-    const url = this.baseUrl + 'ticket/' + ticketNr + '/amountPersons';
-    this.logger.log('updating ticket ' + ticketNr + ' amount persons is ' + amountPersons);
-    return this.http.post(url, amountPersons, {headers: this.headers})
+  updateTicketPersons(ticketNr: number, persons: number): Promise<boolean> {
+    const url = this.baseUrl + 'ticket/' + ticketNr + '/persons';
+    this.logger.log('updating ticket ' + ticketNr + ' persons is ' + persons);
+    return this.http.post(url, persons, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as boolean)
       .catch(this.handleError);

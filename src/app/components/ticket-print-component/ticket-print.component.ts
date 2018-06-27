@@ -54,7 +54,7 @@ export class TicketPrintComponent implements OnInit {
 
   private showTicketItems() {
     this.ticketSummary = "Tafel " + this.ticket.tableNr;
-    this.ticketSummary = this.ticket.amountPersons + (this.ticket.amountPersons == 1 ? " persoon" : " personen");
+    this.ticketSummary = this.ticket.persons + (this.ticket.persons == 1 ? " persoon" : " personen");
     this.ticket.items.forEach(item => {
       this.ticketSummary += item;
     });
