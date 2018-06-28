@@ -14,9 +14,9 @@
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
         <div class="input-group-addon">Aantal Personen</div>
         <input #personsInput type="text" class="form-control" type="number"
-          name="AmountPersonsInput" [ngModel]="ticket.amountPersons"
-          (blur)="updateTicketAmountPersons(personsInput.value)"
-          (keyup.enter)="updateTicketAmountPersons(personsInput.value)">
+          name="PersonsInput" [ngModel]="ticket.persons"
+          (blur)="updateTicketPersons(personsInput.value)"
+          (keyup.enter)="updateTicketPersons(personsInput.value)">
       </div>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
         <span class="input-group-addon">Tijd</span>
@@ -97,6 +97,8 @@
     </div>
   </div>
 </div>
+<!-- 
 <div *ngIf="ticket == null">
   test
 </div>
+ -->

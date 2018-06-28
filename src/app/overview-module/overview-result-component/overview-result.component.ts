@@ -53,7 +53,7 @@ export class OverviewResultComponent implements OnInit{
   }
 
   printTicket(ticketID: string): void {
-    const modalRef = this.modalService.open(TicketPrintComponent, {size: 'lg', windowClass: 'modal-xl'});
+    const modalRef = this.modalService.open(TicketPrintComponent, {size: 'sm', windowClass: ''});
     modalRef.componentInstance.ticketID = ticketID;
     modalRef.componentInstance.isModal = true;
     modalRef.result

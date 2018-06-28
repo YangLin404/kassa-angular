@@ -194,12 +194,12 @@ export class TicketComponent implements OnInit {
     }
   }
 
-  updateTicketAmountPersons(amountPersons: number): void {
-    if (this.ticket.amountPersons !== amountPersons) {
-      this.ticketService.updateTicketAmountPersons(this.ticket.ticketNr, amountPersons)
+  updateTicketPersons(persons: number): void {
+    if (this.ticket.persons !== persons) {
+      this.ticketService.updateTicketPersons(this.ticket.ticketNr, persons)
         .then(success => {
           if (success) {
-            this.ticket.amountPersons = amountPersons;
+            this.ticket.persons = persons;
           }
         });
     }

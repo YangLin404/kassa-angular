@@ -50,6 +50,7 @@ import { TicketPrintComponent } from './components/ticket-print-component/ticket
   ],
   entryComponents: [
     TicketPaymentComponent,
+    TicketPrintComponent,
     ConfirmComponent,
     TicketItemRemarkComponent,
     MoveTableComponent

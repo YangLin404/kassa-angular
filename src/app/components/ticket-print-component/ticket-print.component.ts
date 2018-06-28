@@ -36,7 +36,6 @@ export class TicketPrintComponent implements OnInit {
       this.ticketService.getTicketByIdentifier(this.ticketID)
         .then(ticket => {
           this.ticket = ticket;
-          this.showTicketItems();
         });
     } else {
       const ticketNr = Number(this.route.snapshot.params['nr']);
@@ -44,22 +43,10 @@ export class TicketPrintComponent implements OnInit {
         this.ticketService.getTicketByNr(ticketNr)
           .then(ticket => {
           this.ticket = ticket;
-          this.showTicketItems();
         });
       }
     }
     this._success.subscribe((message) => this.alertMsg = message);
     debounceTime.call(this._success, 3000).subscribe(() => this.alertMsg = null);
   }
-
-  private showTicketItems() {
-    this.ticketSummary = "Tafel " + this.ticket.tableNr;
-    this.ticketSummary = this.ticket.amountPersons + (this.ticket.amountPersons == 1 ? " persoon" : " personen");
-    this.ticket.items.forEach(item => {
-      this.ticketSummary += item;
-    });
-    this.logger.debug(this.ticketSummary);
-    this.logger.debug(this.ticket);
-  }
-
 }
