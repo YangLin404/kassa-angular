@@ -15,7 +15,7 @@
   <div class="input-group">
     <span class="input-group-addon">Opmerking</span>
     <input #remarkInput type="text" class="form-control" [ngModel]="item.remark" (click)="remarkInput.select()">
-    {{ remarkInput.select() }}
+    {{ remarkInput.focus() }}
   </div>
 </div>
 <div class="modal-footer">

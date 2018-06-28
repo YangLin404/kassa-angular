@@ -18,6 +18,7 @@ import {RestoService} from '../resto-component/resto.service';
 import {MoveTableComponent} from '../move-table-component/move-table.component';
 import {Subject} from 'rxjs/Subject';
 import {debounceTime} from 'rxjs/operator/debounceTime';
+import {ItemSearchComponent} from '../item-search-component/item-search.component';
 
 @Component({
   selector: 'app-ticket',
@@ -66,11 +67,12 @@ export class TicketComponent implements OnInit {
     debounceTime.call(this._success, 3000).subscribe(() => this.alertMsg = null);
   }
 
-  addItemToTicket(quicklink: string): void {
+  addItemToTicket(quicklink: string, itemSearchComponent: ItemSearchComponent): void {
     this.ticketService.addItemToTicket(this.ticket.ticketNr, quicklink)
       .then(added => {
         if (added) {
           this.reloadTicketAfterAddItem(quicklink);
+          // todo itemSearchComponent.items.();
         }
       });
   }
