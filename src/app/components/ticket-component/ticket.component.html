@@ -12,7 +12,7 @@
           (keyup.enter)="updateTicketName(nameInput.value)">
       </div>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-        <div class="input-group-addon">Aantal Personen</div>
+        <div class="input-group-addon">Personen</div>
         <input #personsInput type="text" class="form-control" type="number"
           name="PersonsInput" [ngModel]="ticket.persons"
           (blur)="updateTicketPersons(personsInput.value)"
