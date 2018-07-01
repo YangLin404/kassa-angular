@@ -10,6 +10,7 @@
     <div *ngIf="ticket.persons == 1;else plural">{{ticket.persons}} persoon</div>
     <ng-template #plural>{{ticket.persons}} personen</ng-template>    
     <br/>
+    <br/>
     <div *ngFor="let ticketItem of ticket.items | itemSort">
       <div>{{ticketItem.count}}x {{ticketItem.item.name}}</div>
       <div>&nbsp;&nbsp;&nbsp;€ {{ticketItem.totalPrice.toFixed(2)}}</div>
