@@ -26,7 +26,7 @@
   </div>
   <hr>
   <div class="mb-2">
-    <app-item-search name="searchitem" (onItemSelected)="addItemToTicket($event)"></app-item-search>
+    <app-item-search name="searchitem" #searchItem (onItemSelected)="addItemToTicket($event, searchItem)"></app-item-search>
   </div>
   <div class="table-responsive">
   <table class="table table-sm table-bordered table-hover">
@@ -49,7 +49,7 @@
         <button (click)="addItemToTicket(ticketItem.item.quicklink)" class="btn btn-sm btn-primary">+</button>
         <button (click)="removeItemFromTicket(ticketItem.item.quicklink)" class="btn btn-sm btn-danger">-</button>
       </td>
-      <td (click)="openRemark(ticketItem)" [ngClass]="{'Drink':'list-group-item-success',
+      <td (click)="openRemark(ticketItem, searchItem)" [ngClass]="{'Drink':'list-group-item-success',
                       'Soup':'list-group-item-primary',
                       'Entree':'list-group-item-primary',
                       'MainDishe':'list-group-item-info',

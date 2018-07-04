@@ -69,11 +69,11 @@ export class TicketComponent implements OnInit {
     debounceTime.call(this._success, 3000).subscribe(() => this.alertMsg = null);
   }
 
-  addItemToTicket(quicklink: string): void {
+  addItemToTicket(quicklink: string, itemSearch: ItemSearchComponent): void {
     this.ticketService.addItemToTicket(this.ticket.ticketNr, quicklink)
       .then(added => {
         if (added) {
-          this.reloadTicketAfterAddItem(quicklink);
+          this.reloadTicketAfterAddItem(quicklink, itemSearch);
         }
       });
   }
@@ -122,7 +122,7 @@ export class TicketComponent implements OnInit {
       });
   }
 
-  openRemark(ticketItem: TicketItem) {
+  openRemark(ticketItem: TicketItem, itemSearch: ItemSearchComponent) {
     const modalRef = this.modalService.open(TicketItemRemarkComponent);
     modalRef.componentInstance.item = ticketItem;
     modalRef.componentInstance.isMainDishe = this.isMainDishe(ticketItem.item.quicklink);
@@ -137,9 +137,16 @@ export class TicketComponent implements OnInit {
               this.updateTicketRemark(ticketItem, result);
             }
           }
+        })
+        .then(result => {
+          this.setFocusOnSearch(itemSearch);
         });
   }
 
+  private setFocusOnSearch(itemSearch: ItemSearchComponent) {
+    itemSearch.searchInput.nativeElement.focus();
+  }
+  
   openMoveTableModal(fromTable: string) {
     const modalRef = this.modalService.open(MoveTableComponent, {size: 'lg'});
     this.restoService.getTables()
@@ -219,13 +226,13 @@ export class TicketComponent implements OnInit {
     }
   }
 
-  private reloadTicketAfterAddItem(quicklink: string): void {
+  private reloadTicketAfterAddItem(quicklink: string, itemSearch: ItemSearchComponent): void {
     this.ticketService.getTicketByNr((this.ticket.ticketNr))
       .then(ticket => {
         this.ticket = ticket;
         this.calcTicketSummary();
         if (this.isMainDishe(quicklink)) {
-          this.openRemark(this.ticket.items.find(i => i.item.quicklink === quicklink));
+          this.openRemark(this.ticket.items.find(i => i.item.quicklink === quicklink), itemSearch);
         }
       });
   }
