@@ -52,6 +52,7 @@ export class TicketComponent implements OnInit {
         .then(ticket => {
           this.ticket = ticket;
           this.calcTicketSummary();
+          this.setDefaultTicketName();
         });
     } else {
       const ticketNr = Number(this.route.snapshot.params['nr']);
@@ -60,6 +61,7 @@ export class TicketComponent implements OnInit {
           .then(ticket => {
           this.ticket = ticket;
           this.calcTicketSummary();
+          this.setDefaultTicketName();
         });
       }
     }
@@ -250,6 +252,14 @@ export class TicketComponent implements OnInit {
     });
     this.logger.debug(this.ticketSummary);
     this.logger.debug(this.ticket);
+  }
+
+  private setDefaultTicketName() {
+    if(this.ticket.name == null) {
+      let name: string = 'Tafel ' + this.ticket.tableNr;
+      this.updateTicketName(name);
+      this.ticket.name = name;
+      }
   }
 
   private isMainDishe(quicklink: string): boolean {
