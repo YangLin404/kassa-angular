@@ -15,11 +15,11 @@ export enum KEY_CODE {
 }
 
 var remark: { [keycode: number] : string; } = { 
-  97: 'Rijst',
-  98: 'Friet',
-  99: 'Nasi',
-  100:'Bami',
-  101:'Mihoen',
+  1: 'Rijst',
+  2: 'Friet',
+  3: 'Nasi',
+  4: 'Bami',
+  5: 'Mihoen'
  };
 
 @Component({
@@ -62,7 +62,8 @@ export class TicketItemRemarkComponent implements OnInit {
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     console.log(event);
-    if (event.keyCode > 96 && event.keyCode < 102)
-      this.choseExtra(remark[event.keyCode]);
+    event.char
+    if ((event.keyCode > 48 && event.keyCode < 54) || event.keyCode > 96 && event.keyCode < 102)
+      this.choseExtra(remark[event.key]);
   }
 }
