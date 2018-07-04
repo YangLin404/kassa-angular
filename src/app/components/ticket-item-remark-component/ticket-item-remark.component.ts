@@ -63,7 +63,7 @@ export class TicketItemRemarkComponent implements OnInit {
   keyEvent(event: KeyboardEvent) {
     console.log(event);
     event.char
-    if ((event.keyCode > 48 && event.keyCode < 54) || event.keyCode > 96 && event.keyCode < 102)
+    if ((event.keyCode > 48 && event.keyCode < 54) || (event.keyCode > 96 && event.keyCode < 102))
       this.choseExtra(remark[event.key]);
   }
 }
