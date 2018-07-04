@@ -26,6 +26,7 @@
     "bootstrap": "4.0.0-alpha.6",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
+    "ngx-clipboard": "^11.1.1",
     "ngx-logger": "^0.2.9",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"

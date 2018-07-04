@@ -67,12 +67,11 @@ export class TicketComponent implements OnInit {
     debounceTime.call(this._success, 3000).subscribe(() => this.alertMsg = null);
   }
 
-  addItemToTicket(quicklink: string, itemSearchComponent: ItemSearchComponent): void {
+  addItemToTicket(quicklink: string): void {
     this.ticketService.addItemToTicket(this.ticket.ticketNr, quicklink)
       .then(added => {
         if (added) {
           this.reloadTicketAfterAddItem(quicklink);
-          // todo itemSearchComponent.items.();
         }
       });
   }

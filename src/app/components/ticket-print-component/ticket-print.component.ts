@@ -3,10 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {Ticket} from '../ticket-component/ticket';
 import {TicketService} from '../ticket-component/ticket.service';
 import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
-import {NGXLogger} from 'ngx-logger';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {RestoService} from '../resto-component/resto.service';
 import {Subject} from 'rxjs/Subject';
 import {debounceTime} from 'rxjs/operator/debounceTime';
 
@@ -17,25 +14,25 @@ import {debounceTime} from 'rxjs/operator/debounceTime';
 })
 export class TicketPrintComponent implements OnInit {
   ticket: Ticket;
-  ticketSummary: string;
+  ticketSummary: string = '';
+  ticketSummaryRows: number;
   isModal = false;
   ticketID: string;
   alertMsg: string;
   private _success = new Subject<string>();
 
-  constructor(private restoService: RestoService,
+  constructor(
     private ticketService: TicketService,
     private route: ActivatedRoute,
-    private location: Location,
-    private modalService: NgbModal,
     public activeModal: NgbActiveModal,
-    private logger: NGXLogger) {}
+    ) {}
 
   ngOnInit(): void {
     if (this.isModal) {
       this.ticketService.getTicketByIdentifier(this.ticketID)
         .then(ticket => {
           this.ticket = ticket;
+          this.getPrintTicket();
         });
     } else {
       const ticketNr = Number(this.route.snapshot.params['nr']);
@@ -43,10 +40,23 @@ export class TicketPrintComponent implements OnInit {
         this.ticketService.getTicketByNr(ticketNr)
           .then(ticket => {
           this.ticket = ticket;
+          this.getPrintTicket();
         });
       }
     }
     this._success.subscribe((message) => this.alertMsg = message);
     debounceTime.call(this._success, 3000).subscribe(() => this.alertMsg = null);
+  }
+
+  private getPrintTicket() {
+    this.ticketSummaryRows = 5;
+    this.ticketSummary = 'Tafel ' + this.ticket.tableNr + '\r\n';
+    this.ticketSummary += this.ticket.persons + (this.ticket.persons == 1 ? ' persoon' : ' personen') + '\r\n\r\n';
+    this.ticket.items.forEach(item => {
+      this.ticketSummary += item.count + 'x ' + item.item.name + '\r\n';
+      this.ticketSummary += '   € ' + item.totalPrice.toFixed(2) + '\r\n';
+      this.ticketSummaryRows += item.item.name.trim().length / 15 + 1;
+    });
+    this.ticketSummary += '\r\nTotaal: ' + '€ ' + this.ticket.totalPriceWithTax.toFixed(2);
   }
 }

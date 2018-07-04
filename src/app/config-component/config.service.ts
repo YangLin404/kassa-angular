@@ -6,8 +6,8 @@ import {RestoItem} from '../components/item-search-component/resto-item';
 
 @Injectable()
 export class ConfigService {
-  private baseUrl = 'http://wanliresto.ml:7777/api/';
-  // private baseUrl = 'http://localhost:7777/api/';
+  //private baseUrl = 'http://wanliresto.ml:7777/api/';
+   private baseUrl = 'http://localhost:7777/api/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http, private logger: NGXLogger) {}

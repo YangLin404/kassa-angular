@@ -6,20 +6,10 @@
     </button>
   </div>
   <div class="modal-body">
-    <div>Tafel {{ticket.tableNr}}</div>    
-    <div *ngIf="ticket.persons == 1;else plural">{{ticket.persons}} persoon</div>
-    <ng-template #plural>{{ticket.persons}} personen</ng-template>    
-    <br/>
-    <br/>
-    <div *ngFor="let ticketItem of ticket.items | itemSort">
-      <div>{{ticketItem.count}}x {{ticketItem.item.name}}</div>
-      <div>&nbsp;&nbsp;&nbsp;€ {{ticketItem.totalPrice.toFixed(2)}}</div>
-    </div>
-    <br/>
-    <div>Totaal: € {{ticket.totalPriceWithTax.toFixed(2)}}</div>
+    <textarea name="ticketContent" class="form-control" cols="15" rows="{{ticketSummaryRows}}" [(ngModel)]="ticketSummary" #ticketContent></textarea>
   </div>
   <div class="modal-footer">
-    <!-- <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Cross click')">Sluiten</button> -->
+    <button class="btn btn-default" type="button" [ngxClipboard]="ticketContent"><i class="fa fa-copy"></i> Copy</button>
     <button (click)="activeModal.close()" *ngIf="isModal" class="btn btn-outline-dark">Sluiten</button>
   </div>
 </div>
