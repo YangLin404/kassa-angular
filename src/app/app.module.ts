@@ -32,6 +32,7 @@ import {ConfigService} from './config-component/config.service';
 import {ConfigComponent} from './config-component/config.component';
 import {MoveTableComponent} from "./components/move-table-component/move-table.component";
 import { TicketPrintComponent } from './components/ticket-print-component/ticket-print.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { TicketPrintComponent } from './components/ticket-print-component/ticket
     TicketItemRemarkComponent,
     ConfigComponent,
     MoveTableComponent,
-    TicketPrintComponent
+    TicketPrintComponent,
   ],
   entryComponents: [
     TicketPaymentComponent,
@@ -66,7 +67,9 @@ import { TicketPrintComponent } from './components/ticket-print-component/ticket
     NgbModule.forRoot(),
     LoggerModule.forRoot({level: NgxLoggerLevel.INFO, serverLogLevel: NgxLoggerLevel.ERROR}),
     TakeawayModule,
-    OverviewModule
+    OverviewModule,
+    ClipboardModule,
+    FormsModule    
   ],
   providers: [ConfigService, ItemSearchService, RestoService, TicketService, TicketItemRemarkService
     , NgbAccordionConfig, NgbDropdownConfig, NgbTypeaheadConfig, NgbTimepickerConfig, NgbModal, NgbModalStack, NgbAlert
