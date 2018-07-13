@@ -262,9 +262,11 @@ export class TicketComponent implements OnInit {
   }
 
   private setDefaultTicketName() {
-    if(this.ticket.name == null) {
+    if(this.ticket.name === null && this.ticket.ticketType !== 'Takeaway') {
       let name: string = 'Tafel ' + this.ticket.tableNr;
-      this.updateTicketName(name);
+      this.updateTicketPersons(2);
+      this.ticket.persons = 2;
+      this.updateTicketName(name + ' ' + '2 personen');
       this.ticket.name = name;
       }
   }

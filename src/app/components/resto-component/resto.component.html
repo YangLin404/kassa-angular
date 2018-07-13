@@ -11,7 +11,7 @@
         </div>
         <div class="card-footer">
           <div *ngIf="table.ticketNr" class="row">
-            <a [routerLink]="['/ticket', table.ticketNr]" class="btn btn-success btn-block linkBtn col-9 mr-1" style="color: white"><i class="fa fa-external-link" aria-hidden="true"></i> Open ticket</a>
+            <a [routerLink]="['/ticket', table.ticketNr]" class="btn btn-success btn-block linkBtn col-9 mr-1" style="color: white"><i class="fa fa-external-link" aria-hidden="true"></i> Open Ticket</a>
             <a (click)="openConfirmModal(table.ticketNr)" class="btn btn-danger">
               <i class="fa fa-trash-o fa-lg" style="color: white"></i>
             </a>

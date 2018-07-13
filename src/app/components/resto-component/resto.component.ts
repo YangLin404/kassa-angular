@@ -6,6 +6,7 @@ import {NGXLogger} from 'ngx-logger';
 import {ConfirmComponent} from '../confirm-component/confirm.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TicketService} from '../ticket-component/ticket.service';
+import {TicketPrintComponent} from '../../components/ticket-print-component/ticket-print.component';
 
 @Component({
   selector: 'app-resto',

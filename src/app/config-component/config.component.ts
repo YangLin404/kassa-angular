@@ -25,7 +25,7 @@ export class ConfigComponent implements OnInit{
     this.configService.reloadData()
       .then(success => {
         if (success) {
-          this.showAlert('reload data successed');
+          this.showAlert('Data succesvol herladen');
         }
       });
   }
